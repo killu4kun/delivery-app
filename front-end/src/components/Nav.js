@@ -11,12 +11,14 @@ const Nav = ({ titlePage }) => {
     <header>
       <div className="box-nav">
         <NavLink
+          data-testid="customer_products__element-navbar-link-products"
           to="/customer/products"
           className={ titlePage === 'Produtos' ? 'nav-link-active' : 'nav-link' }
         >
           Produtos
         </NavLink>
         <NavLink
+          data-testid="customer_products__element-navbar-link-orders"
           to="/customer/orders"
           className={ titlePage === 'Pedidos' ? 'nav-link-active' : 'nav-link' }
         >
@@ -24,8 +26,14 @@ const Nav = ({ titlePage }) => {
         </NavLink>
       </div>
       <div className="box-nav">
-        <div className="nav-link-user">{ user.name }</div>
+        <div
+          data-testid="customer_products__element-navbar-user-full-name"
+          className="nav-link-user"
+        >
+          { user.name }
+        </div>
         <NavLink
+          data-testid="customer_products__element-navbar-link-logout"
           to="/login"
           className="nav-link-logout"
           onClick={ () => localStorage.removeItem('user') }

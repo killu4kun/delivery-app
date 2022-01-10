@@ -3,24 +3,31 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Login from "./pages/Login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Provider } from "./context/Provider";
 import { Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Products from "./pages/Products";
 import Register from "./pages/Register";
+import { ProductsProvider } from "./context/ProductsContext.js";
+import { Provider } from "./context/Provider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider>
-      <Router>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route exact path="/" component={PrivateRoute}/>
-          <Route path='/customer/products' component={Products}/>
-          <Route path="/register" component={ Register }/>
-        </Switch>
-      </Router>
-    </Provider>
+    <Router>
+      <Switch>
+        <Route path="/login">
+          <Provider>
+            <Login />
+          </Provider>
+        </Route>
+        <Route exact path="/" component={PrivateRoute}/>
+        <Route path='/customer/products'>
+          <ProductsProvider>
+            <Products />
+          </ProductsProvider>
+        </Route>
+        <Route path="/register" component={ Register }/>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
