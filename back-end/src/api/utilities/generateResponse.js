@@ -14,18 +14,16 @@ const codes = {
 
 const errorResponse = (res, key, type) => {
   const code = codes[key];
-  const error = key === 'joi'
-    ? type.details[0].message
-    : errors[key](type);
+  const error = key === 'joi' ? type.details[0].message : errors[key](type);
   return res.status(code).json({ error });
-}
+};
 
 const successResponse = (res, key, json) => {
   const code = codes[key];
   return res.status(code).json(json);
-}
+};
 
 module.exports = {
   errorResponse,
   successResponse,
-}
+};
