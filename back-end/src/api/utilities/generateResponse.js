@@ -1,20 +1,19 @@
 const errors = {
-  notFound: (type) => `${type} not found`,
-  internal: (type) => type.message || 'Internal server error',
+  notFound: (data) => `${data} not found`,
+  internal: (data) => data.message || 'Internal server error',
 };
 
 const codes = {
-  login: 200,
-  read: 200,
+  ok: 200,
   create: 201,
-  joi: 400,
+  badRequest: 400,
   notFound: 404,
   internal: 500,
 };
 
-const errorResponse = (res, key, type) => {
+const errorResponse = (res, key, data) => {
   const code = codes[key];
-  const error = key === 'joi' ? type.details[0].message : errors[key](type);
+  const error = key === ('notFound' || 'internal') ? errors[key](data) : data;
   return res.status(code).json({ error });
 };
 
