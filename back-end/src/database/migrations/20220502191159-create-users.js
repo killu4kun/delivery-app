@@ -1,20 +1,20 @@
 "use strict";
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     const { INTEGER, STRING } = Sequelize;
-    const standard = { type: STRING, allowNull: false };
+    const standard = (type) => ({ type, allowNull: false });
 
     await queryInterface.createTable("users", {
-      id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-      name: standard,
-      email: standard,
-      password: standard,
-      role: standard,
+      id: { ...standard(INTEGER), primaryKey: true, autoIncrement: true },
+      name: standard(STRING(100)),
+      email: { ...standard(STRING(100)), unique: true },
+      password: standard(STRING(32)),
+      role: standard(STRING(20)),
     });
   },
 
-  async down(queryInterface, _Sequelize) {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.dropTable("users");
   },
 };

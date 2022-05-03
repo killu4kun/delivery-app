@@ -29,7 +29,7 @@ module.exports = {
           role: 'customer',
         },
       ],
-      { timestamps: false }
+      { timestamps: false },
     );
   },
 
