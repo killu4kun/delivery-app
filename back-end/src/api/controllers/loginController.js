@@ -6,7 +6,7 @@ module.exports = [
   rescue(async (req, res) => {
     const { email, password } = req.body;
     const { name, role } = res.locals.user;
-    const token = generateToken(email, password);
+    const token = await generateToken(email, password);
     const json = { name, email, role, token };
     successResponse(res, 'ok', json);
   }),

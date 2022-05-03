@@ -1,5 +1,5 @@
 const rescue = require('express-rescue');
-const { getUserByEmail } = require('../services/usersService');
+const { getUserByEmail, getUserByEmailAndPassword } = require('../services/usersService');
 const { errorResponse } = require('../utilities/generateResponse');
 const loginSchema = require('../schemas/loginSchema');
 
@@ -14,10 +14,19 @@ const validateUser = rescue(async (req, res, next) => {
   const { email } = req.body;
   const user = await getUserByEmail(email);
   if (!user) errorResponse(res, 'notFound', 'User');
+  res.locals.user = user;
+  next();
+});
+
+const validatePassword = rescue(async (req, res, next) => {
+  const { email, password } = req.body;
+  const user = await getUserByEmailAndPassword(email, password);
+  if (!user) errorResponse(res, 'badRequest', 'Wrong password');
   next();
 });
 
 module.exports = [
   validateSchema,
+  validatePassword,
   validateUser,
 ];
