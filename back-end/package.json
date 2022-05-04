@@ -15,7 +15,12 @@
     "test": "mocha src/tests/**/*$NAME*.test.js --exit",
     "test:coverage": "nyc --all npm run test",
     "test:coverage:json": "nyc --all --reporter=json-summary npm run test",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "compose:up": "docker-compose up --force-recreate -d",
+    "compose:down": "docker-compose down  --remove-orphans",
+    "db:start": "docker start delivery-app-mysql",
+    "db:stop": "docker stop -t 0 delivery-app-mysql",
+    "db:shell": "docker exec -it delivery-app-mysql bash"
   },
   "dependencies": {
     "@hapi/boom": "9.1.4",

@@ -19,12 +19,7 @@
     "test": "jest -i --forceExit --verbose --config=./jest.config.js",
     "test:dev": "NODE_ENV=development npm run jest -i --forceExit --verbose --config=./jest.config.js",
     "test:dev:open": "NODE_ENV=development HEADLESS=false npm run test:dev",
-    "test:dev:report": "./__tests__/reports/generate.sh",
-    "compose:up": "docker-compose up --force-recreate -d",
-    "compose:down": "docker-compose down  --remove-orphans",
-    "db:start": "docker start delivery-app-mysql",
-    "db:stop": "docker stop -t 0 delivery-app-mysql",
-    "db:shell": "docker exec -it delivery-app-mysql bash"
+    "test:dev:report": "./__tests__/reports/generate.sh"
   },
   "repository": {
     "type": "git",
