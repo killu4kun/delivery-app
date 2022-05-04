@@ -6,14 +6,14 @@ const loginSchema = require('../schemas/loginSchema');
 const validateSchema = rescue(async (req, res, next) => {
   const { email, password } = req.body;
   const { error } = loginSchema.validate({ email, password });
-  if (error) errorResponse(res, 'badRequest', error.details[0].message);
+  if (error) return errorResponse(res, 'badRequest', error.details[0].message);
   next();
 });
 
 const validateUser = rescue(async (req, res, next) => {
   const { email } = req.body;
   const user = await getUserByEmail(email);
-  if (!user) errorResponse(res, 'notFound', 'User');
+  if (!user) return errorResponse(res, 'notFound', 'User');
   res.locals.user = user;
   next();
 });
@@ -21,7 +21,7 @@ const validateUser = rescue(async (req, res, next) => {
 const validatePassword = rescue(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await getUserByEmailAndPassword(email, password);
-  if (!user) errorResponse(res, 'badRequest', 'Wrong password');
+  if (!user) return errorResponse(res, 'badRequest', 'Wrong password');
   next();
 });
 
