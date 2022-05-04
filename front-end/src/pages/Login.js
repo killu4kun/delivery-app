@@ -43,7 +43,6 @@ function Login() {
   return (
     <div className="div-login">
       <h1 className="logo">GRUPO 11</h1>
-
       <div className="container-login">
         <label htmlFor="email">
           Login
@@ -54,7 +53,6 @@ function Login() {
             onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
-
         <label htmlFor="password">
           Senha
           <input

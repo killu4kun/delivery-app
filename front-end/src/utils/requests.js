@@ -6,10 +6,7 @@ const requestUser = async (email, password) => {
     headers: { 'Content-Type': contentType },
     body: JSON.stringify({ email, password }),
   };
-  const user = fetch(
-    `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/login`,
-    options,
-  )
+  const user = fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/login`, options)
     .then((response) => response.json())
     .then((data) => data);
 
@@ -22,10 +19,7 @@ const createUser = async (name, email, password) => {
     headers: { 'Content-Type': contentType },
     body: JSON.stringify({ name, password, email }),
   };
-  const results = await fetch(
-    `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register`,
-    options,
-  )
+  const results = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register`, options)
     .then((response) => response.json())
     .then((data) => data);
   return results;
@@ -39,13 +33,14 @@ const requestProducts = async (token) => {
     method: 'GET',
     headers: reqHeaders,
   };
-  const results = await fetch(
-    `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/products`,
-    options,
-  )
+  const results = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/products`, options)
     .then((response) => response.json())
     .then((data) => data);
   return results;
 };
 
-export { requestUser, createUser, requestProducts };
+export {
+  requestUser,
+  createUser,
+  requestProducts,
+};
