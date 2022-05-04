@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "./context/Provider";
 import { Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import Products from "./pages/Products";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,7 +14,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/" component={PrivateRoute}/>
+          <Route exact path="/" component={PrivateRoute}/>
+          <Route path='/customer/products' component={Products}/>
         </Switch>
       </Router>
     </Provider>
