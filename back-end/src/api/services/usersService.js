@@ -16,10 +16,18 @@ const getUserByEmailAndPassword = async (email, password) => {
   });
 };
 
-const createUser = async (newUser) => {
-  const { name, email, password, role } = newUser;
+const getUserByName = async (name) => (
+  User.findOne({
+    where: { name },
+    attributes: { exclude: ['password'] },
+  })
+);
+
+const createUser = async ({ name, email, password, role }) => {
   const hash = md5(password);
-  const { dataValues } = await User.create({ name, email, password: hash, role });
+  const { dataValues } = await User.create({
+    name, email, password: hash, role,
+  });
   delete dataValues.password;
   return dataValues;
 };
@@ -27,5 +35,6 @@ const createUser = async (newUser) => {
 module.exports = {
   getUserByEmail,
   getUserByEmailAndPassword,
+  getUserByName,
   createUser,
 };
