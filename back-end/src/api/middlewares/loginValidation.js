@@ -27,6 +27,6 @@ const validatePassword = rescue(async (req, _res, next) => {
 
 module.exports = [
   validateSchema,
-  validatePassword,
   validateUser,
+  validatePassword,
 ];
