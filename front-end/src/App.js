@@ -6,11 +6,11 @@ import './App.css';
 
 function App() {
   return (
-    <Switch>
+    {/* <Switch>
       <Route exact path="/" />
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
-    </Switch>
+    </Switch> */}
   );
 }
 

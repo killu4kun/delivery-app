@@ -7,6 +7,7 @@ import { Provider } from "./context/Provider";
 import { Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Products from "./pages/Products";
+import Register from "./pages/Register";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
           <Route path="/login" component={Login} />
           <Route exact path="/" component={PrivateRoute}/>
           <Route path='/customer/products' component={Products}/>
+          <Route path="/register" component={ Register }/>
         </Switch>
       </Router>
     </Provider>

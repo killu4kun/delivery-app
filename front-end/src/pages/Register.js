@@ -80,7 +80,7 @@ const Register = ({ history }) => {
             name="name"
             value={ nameValue }
             minLength="12"
-            data-testid="common_register_input-name"
+            data-testid="common_register__input-name"
             type="text"
             placeholder="Nome"
             onChange={ handleChangeName }
@@ -92,7 +92,7 @@ const Register = ({ history }) => {
             name="email"
             value={ email }
             onChange={ handleChangeEmail }
-            data-testid="common_register_input-email"
+            data-testid="common_register__input-email"
             type="email"
             placeholder="Eamil"
             style={ { marginBottom: '10px ' } }
@@ -102,7 +102,7 @@ const Register = ({ history }) => {
           <input
             name="password"
             value={ password }
-            data-testid="common_register_input-password"
+            data-testid="common_register__input-password"
             onChange={ handleChangePassword }
             type="password"
             placeholder="Senha"
@@ -118,6 +118,7 @@ const Register = ({ history }) => {
 
         <button
           type="button"
+          data-testid="common_register__button-register"
           disabled={ buttonDisabled }
           onClick={ submitRegister }
         >
