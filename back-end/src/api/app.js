@@ -1,7 +1,14 @@
-const express = require('express');
+const app = require('express')();
+const bodyParser = require('body-parser').json();
+const loginRouter = require('./routes/loginRouter');
+const registerRouter = require('./routes/registerRouter');
+const errorMiddleware = require('./middlewares/errorMiddleware');
 
-const app = express();
+app.use(bodyParser);
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+
+app.use(errorMiddleware);
 
 module.exports = app;
