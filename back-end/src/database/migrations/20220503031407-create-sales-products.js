@@ -6,8 +6,8 @@ module.exports = {
     const standard = (type) => ({ type, allowNull: false });
 
     await queryInterface.createTable('salesProducts', {
-      saleId: { ...standard(INTEGER), primaryKey: true, references: { model: 'sales', key: 'id' } },
-      productId: {...standard(INTEGER), primaryKey: true, references: { model: 'products', key: 'id' } },
+      sale_id: { ...standard(INTEGER), primaryKey: true, references: { model: 'sales', key: 'id' } },
+      product_id: {...standard(INTEGER), primaryKey: true, references: { model: 'products', key: 'id' } },
       quantity: standard(INTEGER),
     });
   },

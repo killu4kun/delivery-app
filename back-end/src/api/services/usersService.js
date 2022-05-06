@@ -16,6 +16,8 @@ const getUserByEmailAndPassword = async (email, password) => {
   });
 };
 
+const getUserById = async (id) => User.findByPk(id);
+
 const getUserByName = async (name) => (
   User.findOne({
     where: { name },
@@ -35,6 +37,7 @@ const createUser = async ({ name, email, password, role }) => {
 module.exports = {
   getUserByEmail,
   getUserByEmailAndPassword,
+  getUserById,
   getUserByName,
   createUser,
 };
