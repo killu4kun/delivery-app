@@ -8,12 +8,12 @@ module.exports = {
 
     await queryInterface.createTable('sales', {
       id: { ...standard(INTEGER), primaryKey: true, autoIncrement: true },
-      userId: {...standard(INTEGER), references },
-      sellerId: { ...standard(INTEGER), references },
-      totalPrice: standard(DECIMAL(9, 2)),
-      deliveryAddress: standard(STRING(100)),
-      deliveryNumber: standard(STRING(50)),
-      saleDate: standard(DATE),
+      user_id: {...standard(INTEGER), references },
+      seller_id: { ...standard(INTEGER), references },
+      total_price: standard(DECIMAL(9, 2)),
+      delivery_address: standard(STRING(100)),
+      delivery_number: standard(STRING(50)),
+      sale_date: standard(DATE),
       status: standard(STRING(50)),
     });
   },
