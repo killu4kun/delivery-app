@@ -14,7 +14,6 @@ const Register = ({ history }) => {
   const [error, setError] = useState({ error: false, message: '' });
 
   const handleChangeName = ({ target: { value } }) => {
-    console.log(value);
     setName(value);
     const nameVal = utils.verifyForm('name', value);
     const emailVal = utils.verifyForm('email', email);
@@ -24,7 +23,6 @@ const Register = ({ history }) => {
       setButtonDisabled(true);
       return;
     }
-    console.log(nameVal);
     if (!nameVal.error && !emailVal.error && !passVal.error) { setButtonDisabled(false); }
     setError({ error: false, message: '' });
   };
@@ -64,11 +62,12 @@ const Register = ({ history }) => {
 
   const submitRegister = async () => {
     try {
-      const register = await registerAPI({ name: nameValue, email, value });
-      localStorage.setItem('user', JSON.stringify(register));
+      const data = { name: nameValue, email, password };
+      const register = await registerAPI(data);
+      localStorage.setItem('user', JSON.stringify(register.data));
       history.push('/customer/products');
-    } catch (e) {
-      setError({ error: true, message: e.message });
+    } catch ({ response: { data } }) {
+      setError({ error: true, message: data.error });
     }
   };
 

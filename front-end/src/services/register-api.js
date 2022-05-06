@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const registerFetch = async ({ name, email, password }) => {
   const register = await axios.post('http://localhost:3001/register',
