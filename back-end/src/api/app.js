@@ -13,7 +13,6 @@ app.use(cors());
 app.use('/login', loginRouter);
 app.use('/sales', salesRouter);
 app.use('/register', registerRouter);
-
 app.use('/products', productRouter);
 
 app.use(errorMiddleware);

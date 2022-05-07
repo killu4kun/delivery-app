@@ -1,7 +1,7 @@
 const rescue = require('express-rescue');
 const jwt = require('jsonwebtoken');
 const { promises } = require('fs');
-const { missingToken, invalidToken } = require('../errors/requestErrors');
+const { missingToken, invalidToken } = require('../errors/errorsTemplate');
 
 module.exports = rescue(async (req, res, next) => {
   if (!req.body.role) return next();

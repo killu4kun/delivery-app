@@ -4,7 +4,7 @@ const {
   requiredString,
   requiredCurrency,
   requiredDate,
-} = require('../errors/requestErrors');
+} = require('../errors/errorsTemplate');
 
 module.exports = Joi.object({
   userId: Joi

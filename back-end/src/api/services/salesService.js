@@ -1,5 +1,5 @@
 const { User, Sale } = require('../../database/models');
-const { idNotFound, notFound } = require('../errors/requestErrors');
+const { idNotFound, notFound } = require('../errors/errorsTemplate');
 
 const read = async () => {
   const sales = await Sale.findAll({

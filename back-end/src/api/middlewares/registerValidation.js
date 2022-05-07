@@ -2,7 +2,7 @@ const rescue = require('express-rescue');
 const { getUserByEmail, getUserByName } = require('../services/usersService');
 const registerSchema = require('../schemas/registerSchema');
 const tokenValidation = require('./tokenValidation');
-const { cannotDuplicate, permissionDenied } = require('../errors/requestErrors');
+const { cannotDuplicate, permissionDenied } = require('../errors/errorsTemplate');
 
 const validateSchema = rescue(async (req, _res, next) => {
   registerSchema.validateAsync(req.body);

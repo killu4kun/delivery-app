@@ -1,7 +1,7 @@
 const rescue = require('express-rescue');
 const { getUserByEmail, getUserByEmailAndPassword } = require('../services/usersService');
 const loginSchema = require('../schemas/loginSchema');
-const { idNotFound, wrongPassword } = require('../errors/requestErrors');
+const { idNotFound, wrongPassword } = require('../errors/errorsTemplate');
 
 const validateSchema = rescue(async (req, _res, next) => {
   await loginSchema.validateAsync(req.body);

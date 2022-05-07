@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { requiredString, invalidString } = require('../errors/requestErrors');
+const { requiredString, invalidString } = require('../errors/errorsTemplate');
 
 module.exports = Joi.object({
   name: Joi

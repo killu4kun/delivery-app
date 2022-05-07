@@ -1,4 +1,4 @@
-const { internalServerError } = require('../errors/requestErrors');
+const { internalServerError } = require('../errors/errorsTemplate');
 
 module.exports = (err, _req, res, _next) => {
   const status = err.status || internalServerError.status;

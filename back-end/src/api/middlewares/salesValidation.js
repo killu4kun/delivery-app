@@ -1,6 +1,6 @@
 const rescue = require('express-rescue');
 const { getUserById } = require('../services/usersService');
-const { idNotFound } = require('../errors/requestErrors');
+const { idNotFound } = require('../errors/errorsTemplate');
 const salesSchema = require('../schemas/salesSchema');
 
 const validateSale = rescue(async (req, _res, next) => {
