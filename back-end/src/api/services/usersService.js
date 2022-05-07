@@ -27,9 +27,7 @@ const getUserByName = async (name) => (
 
 const createUser = async ({ name, email, password, role }) => {
   const hash = md5(password);
-  const { dataValues } = await User.create({
-    name, email, password: hash, role,
-  });
+  const { dataValues } = await User.create({ name, email, password: hash, role });
   delete dataValues.password;
   return dataValues;
 };

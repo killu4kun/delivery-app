@@ -1,5 +1,7 @@
+const { internalServerError } = require('../errors/requestErrors');
+
 module.exports = (err, _req, res, _next) => {
-  const code = err.code || 500;
-  const error = err.message || 'Internal server error';
-  res.status(code).json({ error });
+  const status = err.status || internalServerError.status;
+  const error = err.message || internalServerError.message;
+  res.status(status).json({ error });
 };

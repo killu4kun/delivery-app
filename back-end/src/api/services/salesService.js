@@ -1,5 +1,5 @@
 const { User, Sale } = require('../../database/models');
-const { noSales, saleNotFound } = require('../errors/salesErrors');
+const { idNotFound, notFound } = require('../errors/requestErrors');
 
 const read = async () => {
   const sales = await Sale.findAll({
@@ -16,7 +16,7 @@ const read = async () => {
       },
     ],
   });
-  if (!sales.length) throw noSales;
+  if (!sales.length) throw notFound('sales');
   return sales;
 };
 
@@ -35,7 +35,7 @@ const readOne = async (id) => {
       },
     ],
   });
-  if (!sale) throw saleNotFound;
+  if (!sale) throw idNotFound('sale');
   return sale;
 };
 

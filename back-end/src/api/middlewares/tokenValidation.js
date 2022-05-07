@@ -1,16 +1,20 @@
 const rescue = require('express-rescue');
 const jwt = require('jsonwebtoken');
 const { promises } = require('fs');
-const generateError = require('../utilities/generateError');
+const { missingToken, invalidToken } = require('../errors/requestErrors');
 
 module.exports = rescue(async (req, res, next) => {
-  const token = req.headers.authorization;
-  if (!token) throw generateError('Token not found', 401);
-  const jwtSecret = await promises.readFile('jwt.evaluation.key', 'utf8');
+  if (!req.body.role) return next();
 
-  jwt.verify(token, jwtSecret, { algorithm: ['HS256'] }, (err, decoded) => {
-    if (err) throw generateError('Token expired or invalid', 401);
-    res.locals.user = decoded.data.email;
+  const token = req.headers.authorization;
+  if (!token) throw missingToken;
+
+  const jwtSecret = await promises.readFile('jwt.evaluation.key', 'utf8');
+  const jwtConfig = { expiresIn: '30d', algorithm: 'HS256' };
+
+  jwt.verify(token, jwtSecret, jwtConfig, (err, decoded) => {
+    if (err) throw invalidToken;
+    res.locals.decoded = decoded.data;
     next();
   });
 });

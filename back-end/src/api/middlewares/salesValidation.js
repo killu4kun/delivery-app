@@ -1,6 +1,6 @@
 const rescue = require('express-rescue');
 const { getUserById } = require('../services/usersService');
-const { userNotFound, sellerNotFound } = require('../errors/requestErrors');
+const { idNotFound } = require('../errors/requestErrors');
 const salesSchema = require('../schemas/salesSchema');
 
 const validateSale = rescue(async (req, _res, next) => {
@@ -11,9 +11,9 @@ const validateSale = rescue(async (req, _res, next) => {
 const validateUsersById = rescue(async (req, _res, next) => {
   const { userId, sellerId } = req.body;
   const user = await getUserById(userId);
-  if (!user) throw userNotFound;
+  if (!user) throw idNotFound('user');
   const seller = await getUserById(sellerId);
-  if (!seller) throw sellerNotFound;
+  if (!seller) throw idNotFound('seller');
   next();
 });
 
