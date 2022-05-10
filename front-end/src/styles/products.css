@@ -1,7 +1,7 @@
 main {
+  margin-top: 100px;
   position: absolute;
   width: 100%;
-  margin-top: 100px;
 }
 
 .grid-products {
@@ -9,15 +9,16 @@ main {
   grid-template-columns: auto auto auto auto;
   padding: 10px;
 }
+
 .button-checkout {
+  background-color: #036b52;
+  border: none;
+  border-radius: 10px;
+  bottom: 20px;
+  color: white;
+  font-size: 20px;
+  padding: 15px;
   position: fixed;
   right: 20px;
-  bottom: 20px;
-  padding: 15px;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  background-color: #036B52;
-  font-size: 20px;
   z-index: 1;
 }
