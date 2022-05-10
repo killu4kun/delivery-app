@@ -6,7 +6,7 @@ const requestUser = async (email, password) => {
     headers: { 'Content-Type': contentType },
     body: JSON.stringify({ email, password }),
   };
-  const user = fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/login`, options)
+  const user = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/login`, options)
     .then((response) => response.json())
     .then((data) => data);
 
