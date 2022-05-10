@@ -78,12 +78,12 @@ const CardProduct = ({ product }) => {
           >
             -
           </button>
-          <span
+          <input
+            value={ quantity }
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
+            onChange={ () => console.log('nada') }
             className="inputQuantity"
-          >
-            { quantity }
-          </span>
+          />
           <button
             type="button"
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
