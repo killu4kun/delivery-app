@@ -1,16 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { CheckoutConext } from '../context/CheckoutContext';
 import '../styles/cardProduct.css';
 
 const CardProduct = ({ product }) => {
+  const { productCheckout } = useContext(CheckoutConext);
   const [quantity, setQuantity] = useState(0);
-  return (
+  const [buttonSum, setButtonSUm] = useState(true);
+
+  const addProduct = () => {
+    const sum = quantity + 1;
+    setQuantity(sum);
+    productCheckout(product, sum);
+  }
+
+  const removeProduct = () => {
+    const sum = quantity - 1;
+    setQuantity(sum);
+    productCheckout(product, sum);
+  }
+
+  useEffect(() => {
+    if (quantity > 0) {
+      setButtonSUm(false);
+    } else {
+      setButtonSUm(true);
+    }
+  }, [quantity]);
+
+  useEffect(() => {
+    if (localStorage.getItem('checkout')) {
+      const checkout = JSON.parse(localStorage.getItem('checkout'));
+      const filter = checkout.filter((productLocal) => productLocal.id === product.id);
+      if(filter[0]) {
+        setQuantity(filter[0].quantity);
+      }
+    }
+  }, []);
+
+   return (
     <div className="card">
       <div
         className="card-header"
         data-testid={ `customer_products__element-card-price-${product.id}`}
       >
-        { product.price }
+        { 
+          Intl.NumberFormat(
+            'pt-br',
+            { style: 'currency', currency: 'BRL' })
+          .format(product.price)
+        }
       </div>
       <div className="card-body">
         <img
@@ -30,17 +69,22 @@ const CardProduct = ({ product }) => {
         <div>
           <button
             data-testid={ `customer_products__button-card-rm-item-${product.id}`}
+            disabled={ buttonSum }
+            onClick= { removeProduct }
+            className="removeButton"
           >
             -
           </button>
-          <input 
-            type="number"
-            name="qtd"
-            value={ quantity }
+          <span
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
-          />
+            className="inputQuantity"
+          >
+            { quantity }
+          </span>
           <button
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
+            onClick={ addProduct }
+            className="addButton"
           >
             +
           </button>
@@ -51,10 +95,10 @@ const CardProduct = ({ product }) => {
 };
 
 CardProduct.propTypes = {
-  product: PropTypes.objectOf({
+  product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     urlImage: PropTypes.string
   })
 };

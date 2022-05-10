@@ -4,7 +4,7 @@ import productsFetch from '../services/products-api';
 
 export const ProductContext = createContext();
 
-export const ProductsProvider = ({ children}) =>{
+export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const fetchProducst = async () => {
@@ -22,6 +22,7 @@ export const ProductsProvider = ({ children}) =>{
     </ProductContext.Provider>
   );
 }
+
 ProductsProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

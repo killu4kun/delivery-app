@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import Register from "./pages/Register";
 import { ProductsProvider } from "./context/ProductsContext.js";
 import { Provider } from "./context/Provider";
+import { CheckoutProvider } from "./context/CheckoutContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,7 +23,9 @@ ReactDOM.render(
         <Route exact path="/" component={PrivateRoute}/>
         <Route path='/customer/products'>
           <ProductsProvider>
-            <Products />
+            <CheckoutProvider>
+              <Products />
+            </CheckoutProvider>
           </ProductsProvider>
         </Route>
         <Route path="/register" component={ Register }/>
