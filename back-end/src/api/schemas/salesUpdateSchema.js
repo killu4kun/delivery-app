@@ -7,6 +7,8 @@ const {
   deliveryNumberIsInvalid,
   saleDateIsInvalid,
   statusIsInvalid,
+  productIdIsInvalid,
+  productQuantityIsInvalid,
 } = require('../errors/requestErrors');
 
 module.exports = Joi.object({
@@ -17,4 +19,12 @@ module.exports = Joi.object({
   deliveryNumber: Joi.string().max(50).error(deliveryNumberIsInvalid),
   saleDate: Joi.date().error(saleDateIsInvalid),
   status: Joi.string().max(50).error(statusIsInvalid),
+  products: Joi.array().items(
+    Joi.object({
+      id: Joi.number().error(productIdIsInvalid),
+      name: Joi.string(),
+      quantity: Joi.number().error(productQuantityIsInvalid),
+      price: Joi.number().precision(2),
+    }),
+  ),
 });
