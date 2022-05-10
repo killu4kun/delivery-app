@@ -9,8 +9,8 @@
 .nav-link {
   color: white;
   font-weight: 700;
-  text-decoration: none;
   padding: 20px 30px;
+  text-decoration: none;
 }
 
 .nav-link-user {
@@ -21,7 +21,7 @@
 }
 
 .nav-link-logout {
-  background-color: #056cf9; 
+  background-color: #056cf9;
   color: white;
   font-weight: 700;
   padding: 20px 60px;
