@@ -29,23 +29,23 @@ function Login() {
       setError('');
       const user = await requestUser(email, password);
       if (user.error) throw Error(user.error);
-        setUserEmail(email);
-        setUserPassword(password);
-        setUsername(user.name);
-        setToken(user.token);
-        const userToSave = JSON.stringify({
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          token: user.token,
-        });
-        localStorage.setItem('user', userToSave);
-        history.push('/customer/products');
-    } catch(error) {
-      setError(error.message);
+      setUserEmail(email);
+      setUserPassword(password);
+      setUsername(user.name);
+      setToken(user.token);
+      const userToSave = JSON.stringify({
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        token: user.token,
+      });
+      localStorage.setItem('user', userToSave);
+      history.push('/customer/products');
+    } catch (err) {
+      setError(err.message);
     }
   };
-  
+
   return (
     <div className="div-login">
       <h1 className="logo">GRUPO 11</h1>
