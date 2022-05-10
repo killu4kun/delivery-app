@@ -4,7 +4,7 @@ const SalesService = require('../services/salesService');
 module.exports = [
   rescue(async (req, res) => {
     const { id } = req.params;
-    const response = await SalesService.readOne(id);
+    const response = await SalesService.readWhere(id);
     return res.status(200).json(response);
   }),
 ];

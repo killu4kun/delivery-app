@@ -3,6 +3,8 @@ const { getUserById } = require('../services/usersService');
 const { readOne } = require('../services/salesService');
 const { userNotFound, sellerNotFound } = require('../errors/requestErrors');
 const salesSchema = require('../schemas/salesUpdateSchema');
+const Product = require('../services/Products');
+const { productNotFound } = require('../errors/productErros');
 
 const validateSale = rescue(async (req, _res, next) => {
   await salesSchema.validateAsync(req.body);
@@ -36,4 +38,23 @@ const validateUsersById = rescue(async (req, _res, next) => {
   next();
 });
 
-module.exports = [validateSale, validateSaleById, validateUsersById];
+const validateProductsById = rescue(async (req, _res, next) => {
+  const { products } = req.body;
+  if (!products.length) {
+    const db = await Product.getAll();
+    const dbIds = db.map((product) => product.id);
+    products.forEach((product) => {
+      const error = dbIds.includes(product.id);
+      if (!error) next(productNotFound);
+    });
+    next();
+  }
+  next();
+});
+
+module.exports = [
+  validateSale,
+  validateSaleById,
+  validateUsersById,
+  validateProductsById,
+];
