@@ -14,14 +14,14 @@ export const ProductsProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProducst();
-  }, [])
+  }, []);
 
   return (
     <ProductContext.Provider value={ { products } }>
       { children }
     </ProductContext.Provider>
   );
-}
+};
 
 ProductsProvider.propTypes = {
   children: PropTypes.node.isRequired,

@@ -12,13 +12,13 @@ const CardProduct = ({ product }) => {
     const sum = quantity + 1;
     setQuantity(sum);
     productCheckout(product, sum);
-  }
+  };
 
   const removeProduct = () => {
     const sum = quantity - 1;
     setQuantity(sum);
     productCheckout(product, sum);
-  }
+  };
 
   useEffect(() => {
     if (quantity > 0) {
@@ -32,23 +32,25 @@ const CardProduct = ({ product }) => {
     if (localStorage.getItem('checkout')) {
       const checkout = JSON.parse(localStorage.getItem('checkout'));
       const filter = checkout.filter((productLocal) => productLocal.id === product.id);
-      if(filter[0]) {
-        setQuantity(filter[0].quantity);
+      if (filter[0]) {
+        const qty = filter[0].quantity;
+        setQuantity(qty);
       }
     }
-  }, []);
+  }, [product]);
 
-   return (
+  return (
     <div className="card">
       <div
         className="card-header"
-        data-testid={ `customer_products__element-card-price-${product.id}`}
+        data-testid={ `customer_products__element-card-price-${product.id}` }
       >
-        { 
+        {
           Intl.NumberFormat(
             'pt-br',
-            { style: 'currency', currency: 'BRL' })
-          .format(product.price)
+            { style: 'currency', currency: 'BRL' },
+          )
+            .format(product.price)
         }
       </div>
       <div className="card-body">
@@ -68,9 +70,10 @@ const CardProduct = ({ product }) => {
         </p>
         <div>
           <button
-            data-testid={ `customer_products__button-card-rm-item-${product.id}`}
+            type="button"
+            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             disabled={ buttonSum }
-            onClick= { removeProduct }
+            onClick={ removeProduct }
             className="removeButton"
           >
             -
@@ -82,6 +85,7 @@ const CardProduct = ({ product }) => {
             { quantity }
           </span>
           <button
+            type="button"
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
             onClick={ addProduct }
             className="addButton"
@@ -99,8 +103,8 @@ CardProduct.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.string,
-    urlImage: PropTypes.string
-  })
+    urlImage: PropTypes.string,
+  }).isRequired,
 };
 
 export default CardProduct;
