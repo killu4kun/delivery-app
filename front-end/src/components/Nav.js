@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import Logout from '../images/logout.svg';
-import PrivateRoute from '../components/PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 import '../styles/Nav.css';
 
 const Nav = ({ titlePage }) => {
-  if(!localStorage.getItem('user')) {
-    return <PrivateRoute />
+  if (!localStorage.getItem('user')) {
+    return <PrivateRoute />;
   }
   const user = JSON.parse(localStorage.getItem('user'));
 
