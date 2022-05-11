@@ -1,0 +1,94 @@
+.card {
+  border: solid 2px grey;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 250px;
+}
+
+.card-header {
+  font-weight: 900;
+  padding: 10px;
+}
+
+.card-body {
+  height: 100%;
+  width: 100%;
+}
+
+.card-footer {
+  align-items: center;
+  background-color: #f2fffc;
+  border-top: solid 1px  grey;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+}
+
+.price {
+  float: left;
+  font-weight: 900;
+  top: 10px;
+}
+
+.img-product {
+  height: 250px;
+  margin: auto;
+  width: 250px;
+}
+
+.name-product {
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.addButton {
+  background-color: #036b52;
+  border: none;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 10px;
+}
+
+.addButton:hover {
+  background-color: #50c8ac;
+}
+
+.removeButton {
+  background-color: #036b52;
+  border: none;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 10px;
+}
+
+.removeButton:hover {
+  background-color: #50c8ac;
+}
+
+.inputQuantity {
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  padding: 10px;
+  text-align: center;
+  width: 20px;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+input {
+  appearance: textfield;
+}

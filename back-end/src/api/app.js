@@ -1,4 +1,5 @@
 const app = require('express')();
+const express = require('express');
 const bodyParser = require('body-parser').json();
 const cors = require('cors');
 const loginRouter = require('./routes/loginRouter');
@@ -9,6 +10,8 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 
 app.use(bodyParser);
 app.use(cors());
+
+app.use(express.static('public'));
 
 app.use('/login', loginRouter);
 app.use('/sales', salesRouter);
