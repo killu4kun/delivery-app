@@ -9,7 +9,7 @@ import '../styles/products.css';
 const Products = ({ history }) => {
   const title = 'Produtos';
   const { products } = useContext(ProductContext);
-  const { totalPrice, setTotalPrice, buttonCheckout } = useContext(CheckoutConext);
+  const { totalPrice, setTotalPrice, buttonCheckout, datatest } = useContext(CheckoutConext);
 
   useEffect(() => {
     if (localStorage.getItem('totalPrice')) {
@@ -24,7 +24,7 @@ const Products = ({ history }) => {
         <button
           type="button"
           className="button-checkout"
-          data-testid="customer_products__button-cart"
+          data-testid={ datatest }
           disabled={ buttonCheckout }
           onClick={ () => history.push('/customer/checkout') }
         >

@@ -7,6 +7,8 @@ import '../styles/Nav.css';
 
 const Nav = ({ titlePage }) => {
   if (!localStorage.getItem('user')) {
+    localStorage.removeItem('totalPrice');
+    localStorage.removeItem('checkout');
     return <PrivateRoute />;
   }
   const user = JSON.parse(localStorage.getItem('user'));
@@ -40,7 +42,11 @@ const Nav = ({ titlePage }) => {
           data-testid="customer_products__element-navbar-link-logout"
           to="/login"
           className="nav-link-logout"
-          onClick={ () => localStorage.removeItem('user') }
+          onClick={ () => {
+            localStorage.removeItem('user');
+            localStorage.removeItem('totalPrice');
+            localStorage.removeItem('checkout');
+          } }
         >
           SAIR
           <img src={ Logout } alt="logout" className="svg-logout" />

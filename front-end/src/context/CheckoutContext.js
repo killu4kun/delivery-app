@@ -7,6 +7,7 @@ export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [buttonCheckout, setButtonCheckout] = useState(true);
+  const [datatest, setDataTest] = useState('customer_products__button-cart');
 
   const resultTotal = (arrayProduct) => {
     const total = arrayProduct.reduce((
@@ -48,9 +49,10 @@ export const CheckoutProvider = ({ children }) => {
     setTotalPrice(total);
 
     if (total > 0) setButtonCheckout(false);
+    setDataTest('customer_products__checkout-bottom-value');
 
-    // localStorage.setItem('checkout', JSON.stringify(newArray));
-    // localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
+    localStorage.setItem('checkout', JSON.stringify(newArray));
+    localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
   };
 
   const removeProduct = ({ id, name, price }, quantity) => {
@@ -82,11 +84,18 @@ export const CheckoutProvider = ({ children }) => {
     setCheckout(newArray);
     setTotalPrice(total);
 
-    if (total > 0) setButtonCheckout(false);
-    if (total <= 0) setButtonCheckout(true);
+    if (total > 0) {
+      setButtonCheckout(false);
+      setDataTest('customer_products__checkout-bottom-value');
+    }
 
-    // localStorage.setItem('checkout', JSON.stringify(newArray));
-    // localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
+    if (total <= 0) {
+      setButtonCheckout(true);
+      setDataTest('customer_products__button-cart');
+    }
+
+    localStorage.setItem('checkout', JSON.stringify(newArray));
+    localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
   };
 
   useEffect(() => {
@@ -104,6 +113,7 @@ export const CheckoutProvider = ({ children }) => {
         totalPrice,
         setTotalPrice,
         buttonCheckout,
+        datatest,
       } }
     >
       { children }

@@ -22,3 +22,11 @@ main {
   right: 20px;
   z-index: 1;
 }
+
+.button-checkout:hover {
+  background-color: #029270;
+}
+
+.button-checkout:disabled {
+  background-color: gray;
+}
