@@ -20,14 +20,12 @@ ReactDOM.render(
             <Login />
           </Provider>
         </Route>
-        <Route exact path="/" component={PrivateRoute}/>
-        <Route path='/customer/products'>
-          <ProductsProvider>
-            <CheckoutProvider>
-              <Products />
-            </CheckoutProvider>
-          </ProductsProvider>
-        </Route>
+        <Route exact path="/" component={ PrivateRoute }/>
+        <ProductsProvider>
+          <CheckoutProvider>
+            <Route path='/customer/products' component={ Products } />
+          </CheckoutProvider>
+        </ProductsProvider>
         <Route path="/register" component={ Register }/>
       </Switch>
     </Router>

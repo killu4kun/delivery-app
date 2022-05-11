@@ -4,20 +4,26 @@ import { CheckoutConext } from '../context/CheckoutContext';
 import '../styles/cardProduct.css';
 
 const CardProduct = ({ product }) => {
-  const { productCheckout } = useContext(CheckoutConext);
+  const { removeProduct, addProduct } = useContext(CheckoutConext);
   const [quantity, setQuantity] = useState(0);
   const [buttonSum, setButtonSUm] = useState(true);
 
-  const addProduct = () => {
+  const addProductButton = () => {
     const sum = quantity + 1;
     setQuantity(sum);
-    productCheckout(product, sum);
+    addProduct(product, sum);
   };
 
-  const removeProduct = () => {
+  const removeProductButton = () => {
     const sum = quantity - 1;
     setQuantity(sum);
-    productCheckout(product, sum);
+    removeProduct(product, sum);
+  };
+
+  const handleChangeQuantity = ({ target: { value } }) => {
+    setQuantity(value);
+    addProduct(product, value);
+    console.log(value);
   };
 
   useEffect(() => {
@@ -31,7 +37,9 @@ const CardProduct = ({ product }) => {
   useEffect(() => {
     if (localStorage.getItem('checkout')) {
       const checkout = JSON.parse(localStorage.getItem('checkout'));
-      const filter = checkout.filter((productLocal) => productLocal.id === product.id);
+      const filter = checkout.filter((
+        productLocal,
+      ) => productLocal.productId === product.id);
       if (filter[0]) {
         const qty = filter[0].quantity;
         setQuantity(qty);
@@ -73,7 +81,7 @@ const CardProduct = ({ product }) => {
             type="button"
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             disabled={ buttonSum }
-            onClick={ removeProduct }
+            onClick={ removeProductButton }
             className="removeButton"
           >
             -
@@ -81,13 +89,14 @@ const CardProduct = ({ product }) => {
           <input
             value={ quantity }
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
-            onChange={ () => console.log('nada') }
+            type="number"
+            onChange={ handleChangeQuantity }
             className="inputQuantity"
           />
           <button
             type="button"
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
-            onClick={ addProduct }
+            onClick={ addProductButton }
             className="addButton"
           >
             +

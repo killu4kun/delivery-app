@@ -6,45 +6,87 @@ export const CheckoutConext = createContext();
 export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [buttonCheckout, setButtonCheckout] = useState(true);
 
   const resultTotal = (arrayProduct) => {
     const total = arrayProduct.reduce((
       totalOrder,
       product,
-    ) => totalOrder + (Number(product.price) * product.quantity), 0);
+    ) => totalOrder + product.subtotal, 0);
     return total;
   };
 
-  const productCheckout = (product, quantity) => {
-    if (quantity === 0) {
-      const newArray = checkout.filter((
-        productFilter,
-      ) => productFilter.id !== product.id);
-      setCheckout(newArray);
-      localStorage.setItem('checkout', JSON.stringify(newArray));
-      setTotalPrice(resultTotal(newArray));
-      localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
-    } else {
-      const filter = checkout.filter((productFilter) => productFilter.id === product.id);
-      if (filter.length < 1) {
-        const newArray = checkout;
-        product.quantity = quantity;
-        newArray.push(product);
-        setCheckout(newArray);
-        localStorage.setItem('checkout', JSON.stringify(newArray));
-      } else {
-        const newArray = checkout.filter((
-          productFilter,
-        ) => productFilter.id !== product.id);
-        product.quantity = quantity;
-        newArray.push(product);
-        setCheckout(newArray);
-        localStorage.setItem('checkout', JSON.stringify(newArray));
-      }
+  const addProduct = ({ id, name, price }, quantity) => {
+    let newArray = [];
+    const product = {
+      productId: id,
+      name,
+      quantity: 1,
+      unitPrice: Number(price),
+      subtotal: Number(price) * quantity,
+    };
 
-      setTotalPrice(resultTotal(checkout));
-      localStorage.setItem('totalPrice', JSON.stringify(resultTotal(checkout)));
+    const filter = checkout.filter((
+      productFilter,
+    ) => productFilter.productId === product.productId);
+
+    if (filter.length < 1) {
+      newArray = checkout;
+      newArray.push(product);
+    } else {
+      newArray = checkout.filter((
+        productFilter,
+      ) => productFilter.productId !== product.productId);
+
+      product.quantity = quantity;
+      product.subtotal = product.unitPrice * quantity;
+
+      newArray.push(product);
     }
+    const total = resultTotal(newArray);
+    setCheckout(newArray);
+    setTotalPrice(total);
+
+    if (total > 0) setButtonCheckout(false);
+
+    // localStorage.setItem('checkout', JSON.stringify(newArray));
+    // localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
+  };
+
+  const removeProduct = ({ id, name, price }, quantity) => {
+    let newArray = [];
+    const product = {
+      productId: id,
+      name,
+      quantity,
+      unitPrice: Number(price),
+      subtotal: Number(price) * quantity,
+    };
+
+    const filter = checkout.filter((
+      productFilter,
+    ) => productFilter.productId === product.productId);
+
+    if (quantity < 0) {
+      newArray = filter;
+      const indice = newArray.indexOf({ productId: id });
+      newArray.splice(indice, 1);
+    } else {
+      newArray = checkout.filter((
+        productFilter,
+      ) => productFilter.productId !== product.productId);
+      newArray.push(product);
+    }
+
+    const total = resultTotal(newArray);
+    setCheckout(newArray);
+    setTotalPrice(total);
+
+    if (total > 0) setButtonCheckout(false);
+    if (total <= 0) setButtonCheckout(true);
+
+    // localStorage.setItem('checkout', JSON.stringify(newArray));
+    // localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
   };
 
   useEffect(() => {
@@ -56,10 +98,12 @@ export const CheckoutProvider = ({ children }) => {
   return (
     <CheckoutConext.Provider
       value={ {
-        productCheckout,
+        removeProduct,
+        addProduct,
         checkout,
         totalPrice,
         setTotalPrice,
+        buttonCheckout,
       } }
     >
       { children }

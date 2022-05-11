@@ -1,14 +1,15 @@
 import React, { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import CardProduct from '../components/CardProduct';
 import Nav from '../components/Nav';
 import { CheckoutConext } from '../context/CheckoutContext';
 import { ProductContext } from '../context/ProductsContext';
 import '../styles/products.css';
 
-const Products = () => {
+const Products = ({ history }) => {
   const title = 'Produtos';
   const { products } = useContext(ProductContext);
-  const { totalPrice, setTotalPrice } = useContext(CheckoutConext);
+  const { totalPrice, setTotalPrice, buttonCheckout } = useContext(CheckoutConext);
 
   useEffect(() => {
     if (localStorage.getItem('totalPrice')) {
@@ -20,7 +21,13 @@ const Products = () => {
     <>
       <Nav titlePage={ title } />
       <main>
-        <button type="button" className="button-checkout">
+        <button
+          type="button"
+          className="button-checkout"
+          data-testid="customer_products__button-cart"
+          disabled={ buttonCheckout }
+          onClick={ () => history.push('/customer/checkout') }
+        >
           {
             `Ver carrinho: ${Intl.NumberFormat(
               'pt-br',
@@ -39,6 +46,12 @@ const Products = () => {
       </main>
     </>
   );
+};
+
+Products.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Products;
