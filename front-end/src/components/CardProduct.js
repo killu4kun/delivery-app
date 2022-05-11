@@ -21,6 +21,7 @@ const CardProduct = ({ product }) => {
   };
 
   const handleChangeQuantity = ({ target: { value } }) => {
+    if (value < 0) value = 1;
     setQuantity(value);
     addProduct(product, value);
     console.log(value);
