@@ -9,7 +9,12 @@ import '../styles/products.css';
 const Products = ({ history }) => {
   const title = 'Produtos';
   const { products } = useContext(ProductContext);
-  const { totalPrice, setTotalPrice, buttonCheckout, datatest } = useContext(CheckoutConext);
+  const {
+    totalPrice,
+    setTotalPrice,
+    buttonCheckout,
+    datatest,
+  } = useContext(CheckoutConext);
 
   useEffect(() => {
     if (localStorage.getItem('totalPrice')) {
