@@ -15,18 +15,18 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
+        <Route exact path="/" component={ PrivateRoute }/>
         <Route path="/login">
           <Provider>
             <Login />
           </Provider>
         </Route>
-        <Route exact path="/" component={ PrivateRoute }/>
+        <Route path="/register" component={ Register } />
         <ProductsProvider>
           <CheckoutProvider>
             <Route path='/customer/products' component={ Products } />
           </CheckoutProvider>
         </ProductsProvider>
-        <Route path="/register" component={ Register }/>
       </Switch>
     </Router>
   </React.StrictMode>,

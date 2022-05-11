@@ -29,7 +29,8 @@ const Products = ({ history }) => {
         <button
           type="button"
           className="button-checkout"
-          data-testid={ datatest }
+          data-testid="customer_products__checkout-bottom-value"
+          // data-testid={ datatest }
           disabled={ buttonCheckout }
           onClick={ () => history.push('/customer/checkout') }
         >
