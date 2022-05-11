@@ -3,20 +3,21 @@ const {
   SaleProduct,
   Product,
   sequelize,
-} = require('../../database/models');
-const { noSales, saleNotFound } = require('../errors/salesErrors');
+} = require("../../database/models");
+const { getUserByName } = require("./usersService");
+const { noSales, saleNotFound } = require("../errors/salesErrors");
 
 const read = async () => {
   const saleProducts = await SaleProduct.findAll({
     include: [
       {
         model: Sale,
-        as: 'sale',
+        as: "sale",
         // attributes: [],
       },
       {
         model: Product,
-        as: 'product',
+        as: "product",
         // attributes: [],
       },
     ],
@@ -31,12 +32,12 @@ const readWhere = async (id) => {
     include: [
       {
         model: Sale,
-        as: 'sale',
+        as: "sale",
         // attributes: [],
       },
       {
         model: Product,
-        as: 'product',
+        as: "product",
         // attributes: [],
       },
     ],
@@ -45,23 +46,49 @@ const readWhere = async (id) => {
   return saleProducts;
 };
 
+const readWhereUser = async (id) => {
+  const sale = await Sale.findAll({
+    where: { userId: id },
+  });
+  if (!sale.length) throw noSales;
+  return sale;
+};
+
+const readWhereSeller = async (id) => {
+  const sales = await Sale.findAll({
+    where: { sellerId: id }
+  });
+  if (!sales.length) throw noSales;
+  return sales;
+};
+
 const readOne = async (id) => {
   const saleProducts = await SaleProduct.findByPk(id, {
     include: [
       {
         model: Sale,
-        as: 'sale',
+        as: "sale",
         // attributes: [],
       },
       {
         model: Product,
-        as: 'product',
+        as: "product",
         // attributes: [],
       },
     ],
   });
   if (!saleProducts) throw saleNotFound;
   return saleProducts;
+};
+
+const getUserBuysByName = async (name) => {
+  const { id } = await getUserByName(name);
+  return await readWhereUser(id);
+};
+
+const getSellerSalesByName = async (name) => {
+  const { id } = await getUserByName(name);
+  return await readWhereSeller(id);
 };
 
 const mapSalesProductsBulk = async (products, saleId) =>
@@ -90,7 +117,7 @@ const update = async (id, body) => {
     await SaleProduct.update(
       productsMap,
       { where: { saleId: id } },
-      { transaction: t },
+      { transaction: t }
     );
     const updatedSales = await readWhere(id);
     return updatedSales;
@@ -108,4 +135,13 @@ const destroy = async (id) => {
   return result;
 };
 
-module.exports = { read, readOne, readWhere, create, update, destroy };
+module.exports = {
+  read,
+  readOne,
+  readWhere,
+  getUserBuysByName,
+  getSellerSalesByName,
+  create,
+  update,
+  destroy,
+};
