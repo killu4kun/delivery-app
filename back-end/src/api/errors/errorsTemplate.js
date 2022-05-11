@@ -1,4 +1,4 @@
-const generateError = require("../utilities/generateError");
+const generateError = require('../utilities/generateError');
 
 const BAD_REQUEST = 400;
 const UNAUTHORIZED = 401;
@@ -37,7 +37,8 @@ module.exports = {
 
   requiredString: (target, min, max) =>
     generateError({
-      message: `${target} was not provided or is not a string between ${min} and ${max} characters.`,
+      message: `${target} was not provided or is not a string
+      between ${min} and ${max} characters.`,
       status: BAD_REQUEST,
     }),
 
@@ -72,22 +73,22 @@ module.exports = {
     }),
 
   requiredEmail: generateError({
-    message: "email was not provided or does not follow the email pattern.",
+    message: 'email was not provided or does not follow the email pattern.',
     status: BAD_REQUEST,
   }),
 
   wrongPassword: generateError({
-    message: "Provided password does not match the database.",
+    message: 'Provided password does not match the database.',
     status: FORBIDDEN,
   }),
 
   missingToken: generateError({
-    message: "Token was not provided.",
+    message: 'Token was not provided.',
     status: UNAUTHORIZED,
   }),
 
   invalidToken: generateError({
-    message: "Provided token is expired or invalid.",
+    message: 'Provided token is expired or invalid.',
     status: UNAUTHORIZED,
   }),
 
@@ -98,42 +99,42 @@ module.exports = {
     }),
 
   internalServerError: generateError({
-    message: "Internal server error.",
+    message: 'Internal server error.',
     status: INTERNAL_SERVER_ERROR,
   }),
 
   permissionDenied: generateError({
-    message: "Current user does not have access to this resource.",
+    message: 'Current user does not have access to this resource.',
     status: FORBIDDEN,
   }),
 
   productIdIsRequired: generateError({
-    message: "For products 'id' are required",
+    message: 'For products \'id\' are required',
     status: BAD_REQUEST,
   }),
 
   productQuantityIsRequired: generateError({
-    message: "For products 'quantity' are required",
+    message: 'For products \'quantity\' are required',
     status: BAD_REQUEST,
   }),
 
   productIdIsInvalid: generateError({
-    message: "For products, some of the 'id' may be invalid.",
+    message: 'For products, some of the \'id\' may be invalid.',
     status: BAD_REQUEST,
   }),
 
   productQuantityIsInvalid: generateError({
-    message: "For products, some of the 'quantity' may be invalid.",
+    message: 'For products, some of the \'quantity\' may be invalid.',
     status: BAD_REQUEST,
   }),
 
   saleDateIsInvalid: generateError({
-    message: "saleDate is invalid.",
+    message: 'saleDate is invalid.',
     status: BAD_REQUEST,
   }),
 
   statusIsInvalid: generateError({
-    message: "status is invalid.",
+    message: 'status is invalid.',
     status: BAD_REQUEST,
   }),
 };

@@ -1,5 +1,5 @@
-const { Product } = require("../../database/models");
-const { idNotFound } = require("../errors/errorsTemplate");
+const { Product } = require('../../database/models');
+const { idNotFound } = require('../errors/errorsTemplate');
 
 module.exports = {
   getAll: async () => Product.findAll(),
