@@ -28,18 +28,20 @@ const Products = ({ history }) => {
         <button
           type="button"
           className="button-checkout"
-          data-testid="customer_products__checkout-bottom-value"
+          data-testid="customer_products__button-cart"
           // data-testid={ datatest }
           disabled={ buttonCheckout }
           onClick={ () => history.push('/customer/checkout') }
         >
-          {
-            `Ver carrinho: ${Intl.NumberFormat(
-              'pt-br',
-              { style: 'currency', currency: 'BRL' },
-            )
-              .format(totalPrice)}`
-          }
+          <span data-testid="customer_products__checkout-bottom-value">
+            {
+              `Ver carrinho: ${Intl.NumberFormat(
+                'pt-br',
+                { style: 'currency', currency: 'BRL' },
+              )
+                .format(totalPrice)}`
+            }
+          </span>
         </button>
         <div className="grid-products">
           {
