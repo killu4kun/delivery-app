@@ -26,7 +26,7 @@ const Nav = ({ titlePage }) => {
         <NavLink
           data-testid="customer_products__element-navbar-link-orders"
           to="/customer/orders"
-          className={ titlePage === 'Pedidos' ? 'nav-link-active' : 'nav-link' }
+          className={ titlePage === 'Orders' ? 'nav-link-active' : 'nav-link' }
         >
           Meus Pedidos
         </NavLink>

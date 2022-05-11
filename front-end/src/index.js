@@ -4,6 +4,7 @@ import "./index.css";
 import Login from "./pages/Login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
+import Orders from "./pages/Orders";
 import PrivateRoute from "./components/PrivateRoute";
 import Products from "./pages/Products";
 import Register from "./pages/Register";
@@ -22,6 +23,7 @@ ReactDOM.render(
           </Provider>
         </Route>
         <Route path="/register" component={ Register } />
+        <Route path="/customer/orders" component={ Orders } />
         <ProductsProvider>
           <CheckoutProvider>
             <Route path='/customer/products' component={ Products } />
