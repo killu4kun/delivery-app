@@ -1,59 +1,111 @@
-const { User, Sale } = require('../../database/models');
 const { idNotFound, notFound } = require('../errors/errorsTemplate');
+const {
+  Sale,
+  SaleProduct,
+  Product,
+  sequelize,
+} = require('../../database/models');
 
 const read = async () => {
-  const sales = await Sale.findAll({
+  const saleProducts = await SaleProduct.findAll({
     include: [
       {
-        model: User,
-        as: 'user',
-        attributes: ['name', 'role'],
+        model: Sale,
+        as: 'sale',
+        // attributes: [],
       },
       {
-        model: User,
-        as: 'seller',
-        attributes: ['name', 'role'],
+        model: Product,
+        as: 'product',
+        // attributes: [],
       },
     ],
   });
-  if (!sales.length) throw notFound('sales');
-  return sales;
+  if (!saleProducts.length) throw notFound('sales');
+  return saleProducts;
+};
+
+const readWhere = async (id) => {
+  const saleProducts = await SaleProduct.findAll({
+    where: { saleId: id },
+    include: [
+      {
+        model: Sale,
+        as: 'sale',
+        // attributes: [],
+      },
+      {
+        model: Product,
+        as: 'product',
+        // attributes: [],
+      },
+    ],
+  });
+  if (!saleProducts.length) throw notFound('sales');
+  return saleProducts;
 };
 
 const readOne = async (id) => {
-  const sale = await Sale.findByPk(id, {
+  const saleProducts = await SaleProduct.findByPk(id, {
     include: [
       {
-        model: User,
-        as: 'user',
-        attributes: ['name', 'role'],
+        model: Sale,
+        as: 'sale',
+        // attributes: [],
       },
       {
-        model: User,
-        as: 'seller',
-        attributes: ['name', 'role'],
+        model: Product,
+        as: 'product',
+        // attributes: [],
       },
     ],
   });
-  if (!sale) throw idNotFound('sale');
-  return sale;
+  if (!saleProducts) throw idNotFound('sale');
+  return saleProducts;
 };
 
+const mapSalesProductsBulk = async (products, saleId) =>
+  products.map((product) => ({
+    saleId,
+    productId: product.id,
+    quantity: product.quantity,
+  }));
+
 const create = async (body) => {
-  const sale = await Sale.create(body);
-  return sale;
+  const result = await sequelize.transaction(async (t) => {
+    const sale = await Sale.create(body, { transaction: t });
+    const productsMap = await mapSalesProductsBulk(body.products, sale.id);
+    const saleProducts = await SaleProduct.bulkCreate(productsMap, {
+      transaction: t,
+    });
+    return saleProducts;
+  });
+  return result;
 };
 
 const update = async (id, body) => {
-  await Sale.update(body, { where: { id } });
-  const updatedSale = await readOne(id);
-  return updatedSale;
+  const result = await sequelize.transaction(async (t) => {
+    await Sale.update(body, { where: { id } }, { transaction: t });
+    const productsMap = await mapSalesProductsBulk(body.products, id);
+    await SaleProduct.update(
+      productsMap,
+      { where: { saleId: id } },
+      { transaction: t },
+    );
+    const updatedSales = await readWhere(id);
+    return updatedSales;
+  });
+  return result;
 };
 
 const destroy = async (id) => {
-  await readOne(id);
-  await Sale.destroy({ where: { id } });
-  return { message: `Sale ${id} has been deleted` };
+  const result = await sequelize.transaction(async (t) => {
+    await readOne(id);
+    await SaleProduct.destroy({ where: { saleId: id } }, { transaction: t });
+    await Sale.destroy({ where: { id } }, { transaction: t });
+    return { message: `Sales with ${id} has been deleted` };
+  });
+  return result;
 };
 
-module.exports = { read, readOne, create, update, destroy };
+module.exports = { read, readOne, readWhere, create, update, destroy };

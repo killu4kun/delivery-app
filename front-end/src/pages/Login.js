@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provider';
 import '../styles/login.css';
 import { requestUser } from '../utils/requests';
@@ -8,7 +8,6 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [logged, setLogged] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const history = useHistory();
 
@@ -26,9 +25,10 @@ function Login() {
   const { setUserEmail, setUserPassword, setUsername, setToken } = useContext(MyContext);
 
   const validateUser = async () => {
-    setError('');
-    const user = await requestUser(email, password);
-    if (!user.message) {
+    try {
+      setError('');
+      const user = await requestUser(email, password);
+      if (user.error) throw Error(user.error);
       setUserEmail(email);
       setUserPassword(password);
       setUsername(user.name);
@@ -40,14 +40,12 @@ function Login() {
         token: user.token,
       });
       localStorage.setItem('user', userToSave);
-      setLogged(true);
-      console.log(logged);
-    } else {
-      setError('Usuário inválido');
+      history.push('/customer/products');
+    } catch (err) {
+      setError(err.message);
     }
   };
 
-  if (logged) return <Redirect to="/customer/products" />;
   return (
     <div className="div-login">
       <h1 className="logo">GRUPO 11</h1>
@@ -56,7 +54,7 @@ function Login() {
           Login
           <input
             data-testid="common_login__input-email"
-            type="text"
+            type="email"
             placeholder="email@trybeer.com.br"
             onChange={ ({ target }) => setEmail(target.value) }
           />
