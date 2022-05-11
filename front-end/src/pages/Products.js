@@ -13,7 +13,6 @@ const Products = ({ history }) => {
     totalPrice,
     setTotalPrice,
     buttonCheckout,
-    datatest,
   } = useContext(CheckoutConext);
 
   useEffect(() => {
