@@ -51,6 +51,8 @@ export const CheckoutProvider = ({ children }) => {
     if (total > 0) setButtonCheckout(false);
     setDataTest('customer_products__checkout-bottom-value');
 
+    console.log(checkout);
+
     localStorage.setItem('checkout', JSON.stringify(newArray));
     localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
   };

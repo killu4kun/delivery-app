@@ -1,0 +1,45 @@
+.tr-product {
+  background-color: #eaf1ef;
+  height: 35px;
+  line-height: 20px;
+}
+
+.td-item {
+  background-color: #2FC18C;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.td-description { 
+  font-size: 18px;
+  padding-left: 15px;
+}
+
+.td-quantity {
+  background-color: #036B52;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.td-unitPrice {
+  background-color: #421981;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.td-subtotal {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background-color: #056CF9;
+}
