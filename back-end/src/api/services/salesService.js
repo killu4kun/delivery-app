@@ -3,21 +3,21 @@ const {
   SaleProduct,
   Product,
   sequelize,
-} = require("../../database/models");
-const { getUserByName } = require("./usersService");
-const { noSales, saleNotFound } = require("../errors/salesErrors");
+} = require('../../database/models');
+const { getUserByName } = require('./usersService');
+const { noSales, saleNotFound } = require('../errors/salesErrors');
 
 const read = async () => {
   const saleProducts = await SaleProduct.findAll({
     include: [
       {
         model: Sale,
-        as: "sale",
+        as: 'sale',
         // attributes: [],
       },
       {
         model: Product,
-        as: "product",
+        as: 'product',
         // attributes: [],
       },
     ],
@@ -32,12 +32,12 @@ const readWhere = async (id) => {
     include: [
       {
         model: Sale,
-        as: "sale",
+        as: 'sale',
         // attributes: [],
       },
       {
         model: Product,
-        as: "product",
+        as: 'product',
         // attributes: [],
       },
     ],
@@ -56,7 +56,7 @@ const readWhereUser = async (id) => {
 
 const readWhereSeller = async (id) => {
   const sales = await Sale.findAll({
-    where: { sellerId: id }
+    where: { sellerId: id },
   });
   if (!sales.length) throw noSales;
   return sales;
@@ -67,12 +67,12 @@ const readOne = async (id) => {
     include: [
       {
         model: Sale,
-        as: "sale",
+        as: 'sale',
         // attributes: [],
       },
       {
         model: Product,
-        as: "product",
+        as: 'product',
         // attributes: [],
       },
     ],
@@ -83,12 +83,12 @@ const readOne = async (id) => {
 
 const getUserBuysByName = async (name) => {
   const { id } = await getUserByName(name);
-  return await readWhereUser(id);
+  return readWhereUser(id);
 };
 
 const getSellerSalesByName = async (name) => {
   const { id } = await getUserByName(name);
-  return await readWhereSeller(id);
+  return readWhereSeller(id);
 };
 
 const mapSalesProductsBulk = async (products, saleId) =>
@@ -117,7 +117,7 @@ const update = async (id, body) => {
     await SaleProduct.update(
       productsMap,
       { where: { saleId: id } },
-      { transaction: t }
+      { transaction: t },
     );
     const updatedSales = await readWhere(id);
     return updatedSales;

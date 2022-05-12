@@ -8,6 +8,7 @@ const updateSalesController = require('../controllers/updateSalesController');
 const deleteSalesController = require('../controllers/deleteSalesController');
 const getUserBuysByName = require('../controllers/readSalesByUsername');
 const getSellerSalesByName = require('../controllers/readSalesByUsername');
+
 const router = Router();
 
 router
@@ -28,6 +29,5 @@ router
 router
 .route('/seller/:name')
 .get(getSellerSalesByName);
-
 
 module.exports = router;
