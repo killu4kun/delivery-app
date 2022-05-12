@@ -1,0 +1,49 @@
+.nav-link-active {
+  background-color: #2fc18c;
+  color: black;
+  font-weight: 700;
+  padding: 20px 30px;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: white;
+  font-weight: 700;
+  padding: 20px 30px;
+  text-decoration: none;
+}
+
+.nav-link-user {
+  background-color: #421981;
+  color: white;
+  font-weight: 700;
+  padding: 20px 30px;
+}
+
+.nav-link-logout {
+  background-color: #056cf9;
+  color: white;
+  font-weight: 700;
+  padding: 20px 60px;
+  text-decoration: none;
+}
+
+.svg-logout {
+  margin-left: 10px;
+  width: 12px;
+}
+
+.box-nav {
+  display: flex;
+}
+
+header {
+  background-color: #036b52;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+

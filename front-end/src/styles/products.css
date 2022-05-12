@@ -1,0 +1,32 @@
+main {
+  margin-top: 100px;
+  position: absolute;
+  width: 100%;
+}
+
+.grid-products {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 10px;
+}
+
+.button-checkout {
+  background-color: #036b52;
+  border: none;
+  border-radius: 10px;
+  bottom: 20px;
+  color: white;
+  font-size: 20px;
+  padding: 15px;
+  position: fixed;
+  right: 20px;
+  z-index: 1;
+}
+
+.button-checkout:hover {
+  background-color: #029270;
+}
+
+.button-checkout:disabled {
+  background-color: gray;
+}
