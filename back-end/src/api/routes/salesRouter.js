@@ -6,6 +6,8 @@ const salesValidation = require('../middlewares/salesValidation');
 const salesUpdateValidation = require('../middlewares/salesUpdateValidation');
 const updateSalesController = require('../controllers/updateSalesController');
 const deleteSalesController = require('../controllers/deleteSalesController');
+const getUserBuysByName = require('../controllers/readSalesByUsername');
+const getSellerSalesByName = require('../controllers/readSalesByUsername');
 
 const router = Router();
 
@@ -19,5 +21,13 @@ router
   .get(readOneSalesController)
   .put(salesUpdateValidation, updateSalesController)
   .delete(deleteSalesController);
+
+router
+.route('/user/:name')
+.get(getUserBuysByName);
+
+router
+.route('/seller/:name')
+.get(getSellerSalesByName);
 
 module.exports = router;

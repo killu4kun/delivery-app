@@ -4,6 +4,7 @@ const {
   Product,
   sequelize,
 } = require('../../database/models');
+const { getUserByName } = require('./usersService');
 const { noSales, saleNotFound } = require('../errors/salesErrors');
 
 const read = async () => {
@@ -45,6 +46,22 @@ const readWhere = async (id) => {
   return saleProducts;
 };
 
+const readWhereUser = async (id) => {
+  const sale = await Sale.findAll({
+    where: { userId: id },
+  });
+  if (!sale.length) throw noSales;
+  return sale;
+};
+
+const readWhereSeller = async (id) => {
+  const sales = await Sale.findAll({
+    where: { sellerId: id },
+  });
+  if (!sales.length) throw noSales;
+  return sales;
+};
+
 const readOne = async (id) => {
   const saleProducts = await SaleProduct.findByPk(id, {
     include: [
@@ -62,6 +79,16 @@ const readOne = async (id) => {
   });
   if (!saleProducts) throw saleNotFound;
   return saleProducts;
+};
+
+const getUserBuysByName = async (name) => {
+  const { id } = await getUserByName(name);
+  return readWhereUser(id);
+};
+
+const getSellerSalesByName = async (name) => {
+  const { id } = await getUserByName(name);
+  return readWhereSeller(id);
 };
 
 const mapSalesProductsBulk = async (products, saleId) =>
@@ -108,4 +135,13 @@ const destroy = async (id) => {
   return result;
 };
 
-module.exports = { read, readOne, readWhere, create, update, destroy };
+module.exports = {
+  read,
+  readOne,
+  readWhere,
+  getUserBuysByName,
+  getSellerSalesByName,
+  create,
+  update,
+  destroy,
+};
