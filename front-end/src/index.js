@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import { ProductsProvider } from "./context/ProductsContext.js";
 import { Provider } from "./context/Provider";
 import { CheckoutProvider } from "./context/CheckoutContext";
+import Admin from "./pages/Admin";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.render(
             <Login />
           </Provider>
         </Route>
+        <Route path='/admin/manage' component={Admin} />
         <Route path="/register" component={ Register } />
         <ProductsProvider>
           <CheckoutProvider>
