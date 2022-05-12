@@ -12,8 +12,6 @@ app.use(bodyParser);
 app.use(cors());
 app.use(express.static('public'));
 
-app.use(express.static('public'));
-
 app.use('/login', loginRouter);
 app.use('/sales', salesRouter);
 app.use('/register', registerRouter);
