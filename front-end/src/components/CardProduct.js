@@ -10,21 +10,24 @@ const CardProduct = ({ product }) => {
 
   const addProductButton = () => {
     const sum = quantity + 1;
+    console.log(typeof quantity);
     setQuantity(sum);
     addProduct(product, sum);
   };
 
   const removeProductButton = () => {
+    console.log(typeof quantity);
     const sum = quantity - 1;
     setQuantity(sum);
     removeProduct(product, sum);
   };
 
   const handleChangeQuantity = ({ target: { value } }) => {
-    if (value < 0) value = 1;
-    setQuantity(value);
-    addProduct(product, value);
-    console.log(value);
+    const manualQuantity = Number(value);
+    const newValue = manualQuantity > 0 ? manualQuantity : 0;
+    setQuantity(newValue);
+    addProduct(product, newValue);
+    console.log(typeof newValue);
   };
 
   useEffect(() => {

@@ -4,7 +4,7 @@
   flex-direction: column;
   margin: auto;
   margin-bottom: 20px;
-  width: 250px;
+  width: 200px;
 }
 
 .card-header {
@@ -34,9 +34,9 @@
 }
 
 .img-product {
-  height: 250px;
+  height: 200px;
   margin: auto;
-  width: 250px;
+  width: 200px;
 }
 
 .name-product {
@@ -73,6 +73,10 @@
 
 .removeButton:hover {
   background-color: #50c8ac;
+}
+
+.removeButton:disabled {
+  background-color: #355a51;
 }
 
 .inputQuantity {
