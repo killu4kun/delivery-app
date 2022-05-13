@@ -102,6 +102,9 @@ export const CheckoutProvider = ({ children }) => {
     if (localStorage.getItem('checkout')) {
       setCheckout(JSON.parse(localStorage.getItem('checkout')));
     }
+    if (localStorage.getItem('totalPrice')) {
+      setButtonCheckout(false);
+    }
   }, []);
 
   return (
