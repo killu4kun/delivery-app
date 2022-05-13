@@ -27,6 +27,7 @@ ReactDOM.render(
         <ProductsProvider>
           <CheckoutProvider>
             <Route path='/customer/products' component={ Products } />
+            <Route path='/customer/checkout' component={ Checkout } />
           </CheckoutProvider>
         </ProductsProvider>
       </Switch>
