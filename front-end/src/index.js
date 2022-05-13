@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
@@ -11,6 +11,7 @@ import { ProductsProvider } from "./context/ProductsContext.js";
 import { Provider } from "./context/Provider";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import Admin from "./pages/Admin";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
