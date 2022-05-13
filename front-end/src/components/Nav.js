@@ -5,7 +5,7 @@ import Logout from '../images/logout.svg';
 import PrivateRoute from './PrivateRoute';
 import '../styles/Nav.css';
 
-const Nav = ({ titlePage }) => {
+const Nav = ({ children }) => {
   if (!localStorage.getItem('user')) {
     localStorage.removeItem('totalPrice');
     localStorage.removeItem('checkout');
@@ -15,28 +15,13 @@ const Nav = ({ titlePage }) => {
 
   return (
     <header>
-      <div className="box-nav">
-        <NavLink
-          data-testid="customer_products__element-navbar-link-products"
-          to="/customer/products"
-          className={ titlePage === 'Produtos' ? 'nav-link-active' : 'nav-link' }
-        >
-          Produtos
-        </NavLink>
-        <NavLink
-          data-testid="customer_products__element-navbar-link-orders"
-          to="/customer/orders"
-          className={ titlePage === 'Pedidos' ? 'nav-link-active' : 'nav-link' }
-        >
-          Meus Pedidos
-        </NavLink>
-      </div>
+      {children}
       <div className="box-nav">
         <div
           data-testid="customer_products__element-navbar-user-full-name"
           className="nav-link-user"
         >
-          { user.name }
+          {user.name}
         </div>
         <NavLink
           data-testid="customer_products__element-navbar-link-logout"
@@ -57,7 +42,7 @@ const Nav = ({ titlePage }) => {
 };
 
 Nav.propTypes = {
-  titlePage: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Nav;

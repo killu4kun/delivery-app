@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CardProduct from '../components/CardProduct';
 import Nav from '../components/Nav';
+import NavCustomer from '../components/NavCustomer';
 import { CheckoutConext } from '../context/CheckoutContext';
 import { ProductContext } from '../context/ProductsContext';
 import '../styles/products.css';
@@ -9,11 +10,7 @@ import '../styles/products.css';
 const Products = ({ history }) => {
   const title = 'Produtos';
   const { products } = useContext(ProductContext);
-  const {
-    totalPrice,
-    setTotalPrice,
-    buttonCheckout,
-  } = useContext(CheckoutConext);
+  const { totalPrice, setTotalPrice, buttonCheckout } = useContext(CheckoutConext);
 
   useEffect(() => {
     if (localStorage.getItem('totalPrice')) {
@@ -23,7 +20,9 @@ const Products = ({ history }) => {
 
   return (
     <>
-      <Nav titlePage={ title } />
+      <Nav>
+        <NavCustomer titlePage={ title } />
+      </Nav>
       <main>
         <button
           type="button"
@@ -34,21 +33,17 @@ const Products = ({ history }) => {
           onClick={ () => history.push('/customer/checkout') }
         >
           <span data-testid="customer_products__checkout-bottom-value">
-            {
-              `Ver carrinho: ${Intl.NumberFormat(
-                'pt-br',
-                { style: 'currency', currency: 'BRL' },
-              )
-                .format(totalPrice)}`
-            }
+            {`Ver carrinho: ${Intl.NumberFormat('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(totalPrice)}`}
           </span>
         </button>
         <div className="grid-products">
-          {
-            products.length > 0 && products.map((product) => (
+          {products.length > 0
+            && products.map((product) => (
               <CardProduct key={ product.id } product={ product } />
-            ))
-          }
+            ))}
         </div>
       </main>
     </>
