@@ -40,7 +40,9 @@ function Login() {
         token: user.token,
       });
       localStorage.setItem('user', userToSave);
-      history.push('/customer/products');
+      if (user.role === 'administrator') history.push('/admin/manage');
+      if (user.role === 'seller') history.push('/seller/orders');
+      if (user.role === 'customer') history.push('/customer/products');
     } catch (err) {
       setError(err.message);
     }

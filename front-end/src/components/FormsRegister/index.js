@@ -26,7 +26,7 @@ export default function FormsRegister() {
       role: selectRole,
     };
 
-    const endpoint = '/users/admin';
+    const endpoint = '/register';
     setToken(token);
     const userCreated = await createUser(endpoint, payloadRegister);
 
