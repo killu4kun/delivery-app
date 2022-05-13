@@ -40,6 +40,7 @@ function Login() {
         token: user.token,
       });
       localStorage.setItem('user', userToSave);
+      if (user.role === 'seller') return history.push('/seller/orders');
       history.push('/customer/products');
     } catch (err) {
       setError(err.message);
