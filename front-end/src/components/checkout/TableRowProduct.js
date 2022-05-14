@@ -10,7 +10,7 @@ const TableRowProduct = ({ product, item }) => {
     <tr className="tr-product">
       <td
         className="td-item"
-        data-testid={ `customer_checkout__element-order-table-item-number-${itemd}` }
+        data-testid={ `customer_checkout__element-order-table-item-number-${item}` }
       >
         { item + 1 }
       </td>
