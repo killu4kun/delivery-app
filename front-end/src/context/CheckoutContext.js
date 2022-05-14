@@ -56,6 +56,7 @@ export const CheckoutProvider = ({ children }) => {
   };
 
   const removeProduct = ({ id, name, price }, quantity) => {
+    console.log({ id, name, price })
     let newArray = [];
     const product = {
       productId: id,
@@ -69,10 +70,10 @@ export const CheckoutProvider = ({ children }) => {
       productFilter,
     ) => productFilter.productId === product.productId);
 
-    if (quantity < 0) {
-      newArray = filter;
-      const indice = newArray.indexOf({ productId: id });
-      newArray.splice(indice, 1);
+    if (quantity <= 0) {
+      newArray = checkout.filter((
+        productFilter,
+      ) => productFilter.productId !== product.productId);
     } else {
       newArray = checkout.filter((
         productFilter,
@@ -103,6 +104,7 @@ export const CheckoutProvider = ({ children }) => {
       setCheckout(JSON.parse(localStorage.getItem('checkout')));
     }
     if (localStorage.getItem('totalPrice')) {
+      setTotalPrice(Number(JSON.parse(localStorage.getItem('totalPrice'))));
       setButtonCheckout(false);
     }
   }, []);
