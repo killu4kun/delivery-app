@@ -16,14 +16,14 @@ const TableRowProduct = ({ product, item }) => {
       </td>
       <td
         className="td-description"
-        data-testid={ `customer_checkout__element-order-table-name-${product.productId}` }
+        data-testid={ `customer_checkout__element-order-table-name-${item}` }
       >
         { product.name }
       </td>
       <td
         className="td-quantity"
         data-testid={
-          `customer_checkout__element-order-table-quantity-${product.productId}`
+          `customer_checkout__element-order-table-quantity-${item}`
         }
       >
         { product.quantity }
@@ -31,7 +31,7 @@ const TableRowProduct = ({ product, item }) => {
       <td
         className="td-unitPrice"
         data-testid={
-          `customer_checkout__element-order-table-unit-price-${product.productId}`
+          `customer_checkout__element-order-table-unit-price-${item}`
         }
       >
         {
@@ -45,7 +45,7 @@ const TableRowProduct = ({ product, item }) => {
       <td
         className="td-subtotal"
         data-testid={
-          `customer_checkout__element-order-table-sub-total-${product.productId}`
+          `customer_checkout__element-order-table-sub-total-${item}`
         }
       >
         {
@@ -58,12 +58,12 @@ const TableRowProduct = ({ product, item }) => {
       </td>
       <td
         className="td-remover"
-        data-testid={
-          `customer_checkout__element-order-table-remove-${product.productId}`
-        }
       >
         <button
           type="button"
+          data-testid={
+            `customer_checkout__element-order-table-remove-${item}`
+          }
           onClick={ () => removeProduct({
             id: product.productId,
             name: product.name,
