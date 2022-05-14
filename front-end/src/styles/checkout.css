@@ -23,7 +23,7 @@ h3 {
   float: right;
   font-size: 32px;
   font-weight: 900;
-  margin: 10px 20px 10px;
+  margin: 10px 20px;
   padding: 10px 20px;
   text-align: center;
   width: 250px;
@@ -31,7 +31,7 @@ h3 {
 
 .btn-finish-order {
   align-self: center;
-  background-color: #036B52;
+  background-color: #036b52;
   border: none;
   border-radius: 25px;
   color: white;
