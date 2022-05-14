@@ -5,9 +5,9 @@
 }
 
 .td-item {
-  background-color: #2FC18C;
-  border-top-left-radius: 6px;
+  background-color: #2fc18c;
   border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
   font-size: 18px;
   font-weight: 900;
   text-align: center;
@@ -19,7 +19,7 @@
 }
 
 .td-quantity {
-  background-color: #036B52;
+  background-color: #036b52;
   color: white;
   font-size: 18px;
   font-weight: 700;
@@ -35,22 +35,22 @@
 }
 
 .td-subtotal {
+  background-color: #056cf9;
   color: white;
   font-size: 18px;
   font-weight: 700;
   text-align: center;
-  background-color: #056CF9;
 }
 
 .td-remover {
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
   background-color: rgb(205, 55, 55);
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .btn-remover {
-  border: none;
   background-color: rgb(205, 55, 55);
+  border: none;
   color: white;
   font-weight: 900;
   text-align: center;

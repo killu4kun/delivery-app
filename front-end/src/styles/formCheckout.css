@@ -1,6 +1,6 @@
 .container-formCheckout {
- display: flex;
- flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .input-form-checkout-seller {
@@ -24,9 +24,8 @@
   width: 25%;
 }
 
-.input-form  {
-  border: solid 2px rgb(192, 192, 192);
+.input-form {
+  border: solid 2px silver;
   background-color: white;
   padding: 10px 0;
- 
 }

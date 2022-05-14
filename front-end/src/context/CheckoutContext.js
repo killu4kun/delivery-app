@@ -56,7 +56,6 @@ export const CheckoutProvider = ({ children }) => {
   };
 
   const removeProduct = ({ id, name, price }, quantity) => {
-    console.log({ id, name, price })
     let newArray = [];
     const product = {
       productId: id,
@@ -66,9 +65,9 @@ export const CheckoutProvider = ({ children }) => {
       subtotal: Number(price) * quantity,
     };
 
-    const filter = checkout.filter((
+    /* const filter = checkout.filter((
       productFilter,
-    ) => productFilter.productId === product.productId);
+    ) => productFilter.productId === product.productId); */
 
     if (quantity <= 0) {
       newArray = checkout.filter((

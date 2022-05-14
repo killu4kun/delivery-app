@@ -58,12 +58,14 @@ const TableRowProduct = ({ product, item }) => {
       </td>
       <td
         className="td-remover"
-        data-testid={ `customer_checkout__element-order-table-remove-${product.productId}` }
+        data-testid={
+          `customer_checkout__element-order-table-remove-${product.productId}`
+        }
       >
         <button
           type="button"
           onClick={ () => removeProduct({
-            id: product.productId, 
+            id: product.productId,
             name: product.name,
             price: product.unitPrice,
           }, 0) }
@@ -71,7 +73,6 @@ const TableRowProduct = ({ product, item }) => {
         >
           REMOVER
         </button>
-        
       </td>
     </tr>
   );
@@ -84,7 +85,7 @@ TableRowProduct.propTypes = {
     name: PropTypes.string,
     quantity: PropTypes.number,
     unitPrice: PropTypes.number,
-    subtotal: PropTypes.number
+    subtotal: PropTypes.number,
   }).isRequired,
 };
 
