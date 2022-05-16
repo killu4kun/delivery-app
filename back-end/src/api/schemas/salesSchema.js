@@ -39,10 +39,11 @@ module.exports = Joi.object({
     .error(requiredString('status', 0, 50)),
   products: Joi.array().items(
     Joi.object({
-      id: Joi.number().required().error(productIdIsRequired),
+      productId: Joi.number().required().error(productIdIsRequired),
       name: Joi.string(),
       quantity: Joi.number().required().error(productQuantityIsRequired),
-      price: Joi.number().precision(2),
+      unitPrice: Joi.number().precision(2),
+      subtotal: Joi.number().precision(2),
     }),
   ),
 });
