@@ -25,6 +25,9 @@ ReactDOM.render(
         </Route>
         <Route path='/admin/manage' component={Admin} />
         <Route path="/register" component={ Register } />
+        <Route path='/customer/orders/:id'>
+          <h1>Orders Details</h1>
+        </Route>
         <ProductsProvider>
           <CheckoutProvider>
             <Route path='/customer/products' component={ Products } />
