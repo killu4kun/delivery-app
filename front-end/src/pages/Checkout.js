@@ -36,7 +36,7 @@ const Checkout = ({ history }) => {
     try {
       const create = await createSale(token, newOrder);
       destroyCheckout();
-      history.push(`customer/order/${create}`);
+      history.push(`order/${create}`);
     } catch (e) {
       console.log(e);
     }
