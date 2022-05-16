@@ -5,7 +5,7 @@ const saveSale = async (token, bodySale) => {
     method: 'post',
     url: 'http://localhost:3001/sales',
     data: bodySale,
-    headers: { 'authorization': token },
+    headers: { Authorization: token },
   });
 
   return response.data;
