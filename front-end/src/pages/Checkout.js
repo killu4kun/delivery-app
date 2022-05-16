@@ -33,7 +33,7 @@ const Checkout = ({ history }) => {
     const { token } = JSON.parse(localStorage.getItem('user'));
 
     try {
-      const create = await createSale(token, newOrder);
+      const create = await createSale(newOrder);
       destroyCheckout();
       history.push(`customer/order/${create}`);
     } catch (e) {

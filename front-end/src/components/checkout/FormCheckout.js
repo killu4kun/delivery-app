@@ -64,8 +64,8 @@ const FormCheckout = ({ props: {
 
 FormCheckout.propTypes = {
   props: PropTypes.shape({
-    setAdress: PropTypes.func,
-    adress: PropTypes.string,
+    setAddress: PropTypes.func,
+    address: PropTypes.string,
     setNumber: PropTypes.func,
     number: PropTypes.string,
     setSeller: PropTypes.func,
