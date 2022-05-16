@@ -30,8 +30,6 @@ const Checkout = ({ history }) => {
       products: checkout,
     };
 
-    const { token } = JSON.parse(localStorage.getItem('user'));
-
     try {
       const create = await createSale(newOrder);
       destroyCheckout();
