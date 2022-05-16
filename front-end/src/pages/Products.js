@@ -36,7 +36,7 @@ const Products = ({ history }) => {
           Ver carrinho: R$
           <span data-testid="customer_products__checkout-bottom-value">
             {
-              ` ${Intl.NumberFormat(
+              `${Intl.NumberFormat(
                 'pt-br',
               )
                 .format(totalPrice)}`

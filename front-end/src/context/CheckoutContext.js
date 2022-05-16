@@ -12,8 +12,8 @@ export const CheckoutProvider = ({ children }) => {
     const total = arrayProduct.reduce((
       totalOrder,
       product,
-    ) => totalOrder + (product.unitPrice * product.quantity), 0);
-    return total.toFixed(2);
+    ) => totalOrder + product.subtotal, 0);
+    return total;
   };
 
   const destroyCheckout = () => {
@@ -33,6 +33,8 @@ export const CheckoutProvider = ({ children }) => {
       unitPrice: Number(price),
       subtotal: price * quantity,
     };
+
+    console.log(product);
 
     const filter = checkout.filter((
       productFilter,
