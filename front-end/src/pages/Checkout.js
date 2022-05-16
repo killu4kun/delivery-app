@@ -1,28 +1,44 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { CheckoutConext } from '../context/CheckoutContext';
 import FormCheckout from '../components/checkout/FormCheckout';
 import Nav from '../components/Nav';
 import TableProduct from '../components/checkout/TableProduct';
+import createSale from '../services/sales-api';
 import '../styles/checkout.css';
 
-const Checkout = () => {
+const Checkout = ({ history }) => {
   const title = 'Produtos';
-  const { totalPrice } = useContext(CheckoutConext);
-  const [sellerId, setSeller] = useState(1);
-  const [deliveryAdress, setAdress] = useState('');
+  const { totalPrice, checkout, destroyCheckout } = useContext(CheckoutConext);
+  const [sellerId, setSeller] = useState(2);
+  const [deliveryAddress, setAddress] = useState('');
   const [deliveryNumber, setNumber] = useState('');
 
-  const submitOrder = () => {
+  const submitOrder = async () => {
+    const date = new Date();
+    const today = date.toISOString().split('T')[0];
+    const time = ` ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
     const newOrder = {
-      userId: 1,
+      userId: 3,
       sellerId,
-      totalPrice,
-      deliveryAdress,
+      totalPrice: Number(totalPrice).toFixed(2),
+      deliveryAddress,
       deliveryNumber,
-      products,
+      saleDate: today + time,
+      status: 'Pendente',
+      products: checkout,
     };
 
-    console.log(newOrder);
+    const { token } = JSON.parse(localStorage.getItem('user'));
+
+    try {
+      const create = await createSale(token, newOrder);
+      destroyCheckout();
+      history.push(`customer/order/${create}`);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -32,9 +48,6 @@ const Checkout = () => {
         <h3>Finalizar Pedido</h3>
         <div className="container-checkout">
           <TableProduct />
-          <p>{ sellerId }</p>
-          <p>{ deliveryAdress }</p>
-          <p>{ deliveryNumber }</p>
           <div
             className="total-price"
             data-testid="customer_checkout__element-order-total-price"
@@ -52,8 +65,8 @@ const Checkout = () => {
         <div className="container-form">
           <FormCheckout
             props={ {
-              setAdress,
-              deliveryAdress,
+              setAddress,
+              deliveryAddress,
               setNumber,
               deliveryNumber,
               setSeller,
@@ -72,6 +85,12 @@ const Checkout = () => {
       </main>
     </>
   );
+};
+
+Checkout.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Checkout;

@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import '../../styles/formCheckout.css';
 
 const FormCheckout = ({ props: {
-  setAdress,
-  adress,
+  setAddress,
+  address,
   setNumber,
   number,
   setSeller,
   sellerId,
 } }) => {
   const handleChangeAdress = ({ target: { value } }) => {
-    setAdress(value);
+    setAddress(value);
   };
 
   const handleChangeNumber = ({ target: { value } }) => {
@@ -33,8 +33,7 @@ const FormCheckout = ({ props: {
           value={ sellerId }
           onChange={ handleChangeSeller }
         >
-          <option value="1">Fulana</option>
-          <option value="2">Outra Fulana</option>
+          <option value="2">Fulana</option>
         </select>
       </div>
       <div className="input-form-checkout-adress">
@@ -43,7 +42,7 @@ const FormCheckout = ({ props: {
           name="adress"
           type="text"
           className="input-form"
-          value={ adress }
+          value={ address }
           onChange={ handleChangeAdress }
           data-testid="customer_checkout__input-address"
         />

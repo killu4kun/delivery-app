@@ -53,7 +53,7 @@ const TableRowProduct = ({ product, item }) => {
             'pt-br',
             { style: 'currency', currency: 'BRL' },
           )
-            .format(product.subtotal)
+            .format(product.unitPrice * product.quantity)
         }
       </td>
       <td
