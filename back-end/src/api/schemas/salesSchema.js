@@ -37,6 +37,10 @@ module.exports = Joi.object({
     .required()
     .max(50)
     .error(requiredString('status', 0, 50)),
+
+  role: Joi.string()
+    .required(),
+
   products: Joi.array().items(
     Joi.object({
       productId: Joi.number().required().error(productIdIsRequired),

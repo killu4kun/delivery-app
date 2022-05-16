@@ -15,6 +15,8 @@ const Checkout = ({ history }) => {
   const [deliveryNumber, setNumber] = useState('');
 
   const submitOrder = async () => {
+    const { role, token } = JSON.parse(localStorage.getItem('user'));
+
     const date = new Date();
     const today = date.toISOString().split('T')[0];
     const time = ` ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
@@ -27,13 +29,12 @@ const Checkout = ({ history }) => {
       deliveryNumber,
       saleDate: today + time,
       status: 'Pendente',
+      role,
       products: checkout,
     };
 
-    const { role, token } = JSON.parse(localStorage.getItem('user'));
-
     try {
-      const create = await createSale(token, { newOrder, role });
+      const create = await createSale(token, newOrder);
       destroyCheckout();
       history.push(`customer/order/${create}`);
     } catch (e) {

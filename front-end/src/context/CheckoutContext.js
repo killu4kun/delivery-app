@@ -18,7 +18,9 @@ export const CheckoutProvider = ({ children }) => {
 
   const destroyCheckout = () => {
     setCheckout([]);
+    localStorage.setItem('checkout', JSON.stringify([]));
     setTotalPrice(0);
+    localStorage.setItem('totalPrice', JSON.stringify(0));
     setButtonCheckout(true);
   };
 
