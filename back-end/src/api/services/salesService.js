@@ -68,7 +68,7 @@ const readOne = async (id) => {
 const mapSalesProductsBulk = async (products, saleId) =>
   products.map((product) => ({
     saleId,
-    productId: product.id,
+    productId: product.productId,
     quantity: product.quantity,
   }));
 
@@ -76,10 +76,10 @@ const create = async (body) => {
   const result = await sequelize.transaction(async (t) => {
     const sale = await Sale.create(body, { transaction: t });
     const productsMap = await mapSalesProductsBulk(body.products, sale.id);
-    const saleProducts = await SaleProduct.bulkCreate(productsMap, {
+    await SaleProduct.bulkCreate(productsMap, {
       transaction: t,
     });
-    return saleProducts;
+    return sale.id;
   });
   return result;
 };

@@ -42,6 +42,9 @@ function Login() {
       localStorage.setItem('user', userToSave);
       if (user.role === 'seller') return history.push('/seller/orders');
       history.push('/customer/products');
+      if (user.role === 'administrator') history.push('/admin/manage');
+      if (user.role === 'seller') history.push('/seller/orders');
+      if (user.role === 'customer') history.push('/customer/products');
     } catch (err) {
       setError(err.message);
     }
