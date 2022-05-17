@@ -1,0 +1,55 @@
+.main-checkout {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-left: 125px;
+}
+
+.container-checkout {
+  align-self: center;
+  border: solid 2px rgb(162, 162, 162);
+  width: 80%;
+}
+
+.total-price {
+  background-color: #036b52;
+  border-radius: 15px;
+  color: white;
+  float: right;
+  font-size: 32px;
+  font-weight: 900;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  text-align: center;
+  width: 250px;
+}
+
+.btn-finish-order {
+  align-self: center;
+  background-color: #036b52;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+  padding: 15px 60px;
+  width: 450px;
+}
+
+.btn-finish-order:hover {
+  background-color: #04a680;
+}
+
+.container-form {
+  align-self: center;
+  border: solid 2px rgb(162, 162, 162);
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  width: 80%;
+}

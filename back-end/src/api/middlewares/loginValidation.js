@@ -1,19 +1,17 @@
 const rescue = require('express-rescue');
 const { getUserByEmail, getUserByEmailAndPassword } = require('../services/usersService');
-const generateError = require('../utilities/generateError');
 const loginSchema = require('../schemas/loginSchema');
+const { idNotFound, wrongPassword } = require('../errors/errorsTemplate');
 
 const validateSchema = rescue(async (req, _res, next) => {
-  const { email, password } = req.body;
-  const { error } = loginSchema.validate({ email, password });
-  if (error) throw generateError(error.details[0].message, 400);
+  await loginSchema.validateAsync(req.body);
   next();
 });
 
 const validateUser = rescue(async (req, res, next) => {
   const { email } = req.body;
   const user = await getUserByEmail(email);
-  if (!user) throw generateError('User not found', 404);
+  if (!user) throw idNotFound('user');
   res.locals.user = user;
   next();
 });
@@ -21,7 +19,7 @@ const validateUser = rescue(async (req, res, next) => {
 const validatePassword = rescue(async (req, _res, next) => {
   const { email, password } = req.body;
   const user = await getUserByEmailAndPassword(email, password);
-  if (!user) throw generateError('Wrong password', 400);
+  if (!user) throw wrongPassword;
   next();
 });
 
