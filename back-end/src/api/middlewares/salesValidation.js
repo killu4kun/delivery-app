@@ -24,7 +24,7 @@ const validateProductsById = rescue(async (req, _res, next) => {
   const db = await Product.getAll();
   const dbIds = db.map((product) => product.id);
   products.forEach((product) => {
-    const error = dbIds.includes(product.id);
+    const error = dbIds.includes(product.productId);
     if (!error) next(idNotFound('product'));
   });
   next();

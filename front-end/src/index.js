@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
@@ -11,6 +11,7 @@ import { ProductsProvider } from "./context/ProductsContext.js";
 import { Provider } from "./context/Provider";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import Admin from "./pages/Admin";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,9 +25,13 @@ ReactDOM.render(
         </Route>
         <Route path='/admin/manage' component={Admin} />
         <Route path="/register" component={ Register } />
+        <Route path='/customer/orders/:id'>
+          <h1>Orders Details</h1>
+        </Route>
         <ProductsProvider>
           <CheckoutProvider>
             <Route path='/customer/products' component={ Products } />
+            <Route path='/customer/checkout' component={ Checkout } />
           </CheckoutProvider>
         </ProductsProvider>
       </Switch>

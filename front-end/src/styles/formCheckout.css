@@ -1,0 +1,31 @@
+.container-formCheckout {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-form-checkout-seller {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  width: 30%;
+}
+
+.input-form-checkout-adress {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  width: 50%;
+}
+
+.input-form-checkout-number {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  width: 25%;
+}
+
+.input-form {
+  background-color: white;
+  border: solid 2px silver;
+  padding: 10px 0;
+}
