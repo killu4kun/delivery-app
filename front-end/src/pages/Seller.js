@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import NavSeller from '../components/NavSeller';
 import { salesFetch } from '../services/sales-api';
@@ -17,7 +18,7 @@ function Seller() {
             { id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber },
             index,
           ) => (
-            <section key={ index }>
+            <Link key={ index } to={ `/seller/orders/${id}` }>
               <div>
                 <h6>Pedido</h6>
                 <div data-testid={ `seller_orders__element-order-id-${id}` }>
@@ -45,7 +46,7 @@ function Seller() {
 
                 </h5>
               </div>
-            </section>
+            </Link>
           ),
         )}
       </div>
