@@ -12,7 +12,7 @@ const Orders = ({ history }) => {
   const fetchOrders = async () => {
     const { id } = JSON.parse(localStorage.getItem('user'));
     try {
-      const result = await getSalesUser(id)
+      const result = await getSalesUser(id);
       setOrders(result);
     } catch (e) {
       console.log(e);
@@ -29,8 +29,8 @@ const Orders = ({ history }) => {
       <main className="main-order">
         <div className="grid-orders">
           {
-            orders.length >= 1 &&
-            orders.map((order, index) => (
+            orders.length >= 1
+            && orders.map((order, index) => (
               <CardOrder key={ index } history={ history } order={ order } />
             ))
           }

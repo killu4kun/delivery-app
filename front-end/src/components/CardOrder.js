@@ -22,16 +22,21 @@ const CardOrder = ({ history, order }) => (
       </div>
     </div>
     <div className="card-date-price">
-      <div className="date" data-testid={ `customer_orders__element-order-date-${order.id}` }>
+      <div
+        className="date"
+        data-testid={
+          `customer_orders__element-order-date-${order.id}`
+        }
+      >
         { Intl.DateTimeFormat('pt-BR').format(order.saleDate) }
       </div>
       <div className="price" data-testid={ `customer_orders__element-card-price-${1}` }>
         {
           Intl.NumberFormat(
-          'pt-br',
-          { style: 'currency', currency: 'BRL' },
+            'pt-br',
+            { style: 'currency', currency: 'BRL' },
           )
-          .format(order.totalPrice)
+            .format(order.totalPrice)
         }
       </div>
     </div>

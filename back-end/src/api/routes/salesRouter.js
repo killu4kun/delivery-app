@@ -11,7 +11,6 @@ const getUserBuysByName = require('../controllers/readSalesByUsername');
 const getSellerSalesByName = require('../controllers/readSalesByUsername');
 const readSalesByUserId = require('../controllers/readSalesByUserId');
 
-
 const router = Router();
 
 router
@@ -32,7 +31,6 @@ router
 router
 .route('/user/:name')
 .get(getUserBuysByName);
-
 
 router
 .route('/seller/:name')
