@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const saveSale = async (token, bodySale) => {
+export const saveSale = async (token, bodySale) => {
   const response = await axios({
     method: 'post',
     url: 'http://localhost:3001/sales',
@@ -11,4 +11,7 @@ const saveSale = async (token, bodySale) => {
   return response.data;
 };
 
-export default saveSale;
+export const getSalesUser = async (id) => {
+  const response = await axios(`http://localhost:3001/sales/userid/${id}`);
+  return response.data;
+};

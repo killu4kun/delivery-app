@@ -4,7 +4,7 @@ import { CheckoutConext } from '../context/CheckoutContext';
 import FormCheckout from '../components/checkout/FormCheckout';
 import Nav from '../components/Nav';
 import TableProduct from '../components/checkout/TableProduct';
-import createSale from '../services/sales-api';
+import { saveSale as createSale } from '../services/sales-api';
 import '../styles/checkout.css';
 
 const Checkout = ({ history }) => {
