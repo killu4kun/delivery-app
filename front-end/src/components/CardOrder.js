@@ -2,46 +2,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/cardOrder.css';
 
-const CardOrder = ({ history, order }) => (
-  <button
-    className="card-order"
-    type="button"
-    data-testid={ `customer_orders__element-order-id-${order.id}` }
-    onClick={ () => history.push(`/customer/order/${order.id}`) }
-  >
-    <div className="card-orderId">
-      <span>Pedido</span>
-      <p>{ order.id }</p>
-    </div>
-    <div className="card-status">
-      <div
-        className="status"
-        data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-      >
-        { order.status }
+const CardOrder = ({ history, order }) => {
+  const date = new Date(order.saleDate);
+
+  return (
+    <button
+      className="card-order"
+      type="button"
+      data-testid={ `customer_orders__element-order-id-${order.id}` }
+      onClick={ () => history.push(`/customer/order/${order.id}`) }
+    >
+      <div className="card-orderId">
+        <span>Pedido</span>
+        <p>{ order.id }</p>
       </div>
-    </div>
-    <div className="card-date-price">
-      <div
-        className="date"
-        data-testid={
-          `customer_orders__element-order-date-${order.id}`
-        }
-      >
-        { Intl.DateTimeFormat('pt-BR').format(order.saleDate) }
+      <div className="card-status">
+        <div
+          className="status"
+          data-testid={ `customer_orders__element-delivery-status-${order.id}` }
+        >
+          { order.status }
+        </div>
       </div>
-      <div className="price" data-testid={ `customer_orders__element-card-price-${1}` }>
-        {
-          Intl.NumberFormat(
-            'pt-br',
-            { style: 'currency', currency: 'BRL' },
-          )
-            .format(order.totalPrice)
-        }
+      <div className="card-date-price">
+        <div
+          className="date"
+          data-testid={
+            `customer_orders__element-order-date-${order.id}`
+          }
+        >
+          { Intl.DateTimeFormat('pt-BR').format(date) }
+        </div>
+        <div className="price" data-testid={ `customer_orders__element-card-price-${1}` }>
+          {
+            Intl.NumberFormat(
+              'pt-br',
+              { style: 'currency', currency: 'BRL' },
+            )
+              .format(order.totalPrice)
+          }
+        </div>
       </div>
-    </div>
-  </button>
-);
+    </button>
+  );
+};
 
 CardOrder.propTypes = {
   history: PropTypes.shape({
