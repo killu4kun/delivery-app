@@ -39,7 +39,7 @@ const CardOrder = ({ history, order }) => {
               'pt-br',
               { style: 'currency', currency: 'BRL' },
             )
-              .format(order.totalPrice).toFixed(2)
+              .format(order.totalPrice)
           }
         </div>
       </div>

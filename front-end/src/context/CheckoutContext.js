@@ -13,7 +13,7 @@ export const CheckoutProvider = ({ children }) => {
       totalOrder,
       product,
     ) => totalOrder + product.subtotal, 0);
-    return total;
+    return total.toFixed(2);
   };
 
   const destroyCheckout = () => {

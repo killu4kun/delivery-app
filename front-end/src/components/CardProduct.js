@@ -59,7 +59,7 @@ const CardProduct = ({ product }) => {
             'pt-br',
             { style: 'currency', currency: 'BRL' },
           )
-            .format(product.price).toFixed(2)
+            .format(product.price)
         }
       </div>
       <div className="card-body">

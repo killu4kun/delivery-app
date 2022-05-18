@@ -14,8 +14,8 @@ const Orders = ({ history }) => {
     try {
       const result = await getSalesUser(id);
       setOrders(result);
-    } catch (e) {
-      console.log(e);
+    } catch ({ response: { data } }) {
+      console.log(data);
     }
   };
 
