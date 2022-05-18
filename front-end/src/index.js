@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import Orders from "./pages/Orders";
 import PrivateRoute from "./components/PrivateRoute";
@@ -18,7 +18,8 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
-        <Route exact path="/" component={ PrivateRoute }/>
+        {/* <Route exact path="/" component={ PrivateRoute }/> */}
+        <Redirect exact from="/" to="/login" />
         <Route path="/login">
           <Provider>
             <Login />

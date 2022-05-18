@@ -10,7 +10,7 @@ const CardOrder = ({ history, order }) => {
       className="card-order"
       type="button"
       data-testid={ `customer_orders__element-order-id-${order.id}` }
-      onClick={ () => history.push(`/customer/order/${order.id}`) }
+      onClick={ () => history.push(`/customer/orders/${order.id}`) }
     >
       <div className="card-orderId">
         <span>Pedido</span>
@@ -39,7 +39,7 @@ const CardOrder = ({ history, order }) => {
               'pt-br',
               { style: 'currency', currency: 'BRL' },
             )
-              .format(order.totalPrice)
+              .format(order.totalPrice).toFixed(2)
           }
         </div>
       </div>
