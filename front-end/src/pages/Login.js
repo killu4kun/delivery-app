@@ -29,7 +29,7 @@ function Login() {
       if (user.role === 'seller') history.push('/seller/orders');
       if (user.role === 'customer') history.push('/customer/products');
     }
-  }, []);
+  }, [history]);
 
   const { setUserEmail, setUserPassword, setUsername, setToken } = useContext(MyContext);
 

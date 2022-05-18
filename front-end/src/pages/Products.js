@@ -41,7 +41,7 @@ const Products = ({ history }) => {
                 {
                   style: 'currency',
                   currency: 'BRL',
-                  minimumFractionDigits: 2
+                  minimumFractionDigits: 2,
                 },
               )
                 .format(totalPrice)}`

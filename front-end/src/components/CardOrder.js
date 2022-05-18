@@ -37,7 +37,11 @@ const CardOrder = ({ history, order }) => {
           {
             Intl.NumberFormat(
               'pt-br',
-              { style: 'currency', currency: 'BRL' },
+              {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+              },
             )
               .format(order.totalPrice)
           }
