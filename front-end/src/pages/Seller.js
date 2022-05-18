@@ -6,7 +6,7 @@ import { salesFetch } from '../services/sales-api';
 
 function Seller() {
   const title = 'VenededorPedidos';
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({ name: '' });
   const [sales, setSales] = useState([]);
 
   const renderSales = () => {
