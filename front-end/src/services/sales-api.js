@@ -15,3 +15,8 @@ export const saveSale = async (token, bodySale) => {
 
   return response.data;
 };
+
+export const getSalesUser = async (id) => {
+  const response = await axios(`http://localhost:3001/sales/userid/${id}`);
+  return response.data;
+};

@@ -32,15 +32,20 @@ const Products = ({ history }) => {
           disabled={ buttonCheckout }
           onClick={ () => history.push('/customer/checkout') }
         >
-          Ver carrinho: R$
+          Ver carrinho:
           <span data-testid="customer_products__checkout-bottom-value">
             {`Ver carrinho: ${Intl.NumberFormat('pt-br', {
               style: 'currency',
               currency: 'BRL',
             }).format(totalPrice)}`}
             {
-              `${Intl.NumberFormat(
+              ` ${Intl.NumberFormat(
                 'pt-br',
+                {
+                  style: 'currency',
+                  currency: 'BRL',
+                  minimumFractionDigits: 2,
+                },
               )
                 .format(totalPrice)}`
             }

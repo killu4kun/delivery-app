@@ -118,6 +118,31 @@ const getSellerSalesByName = async (name) => {
   return sales;
 };
 
+const getUserSalesByUserId = async (id) => {
+  const salesUser = await Sale.findAll({
+    where: { userId: id },
+  });
+  /* const saleProducts = await SaleProduct.findAll({
+    include: [
+      {
+        model: Sale,
+        as: 'sale',
+        // attributes: [],
+        where: {
+          userId: id
+        }
+      },
+      {
+        model: Product,
+        as: 'product',
+        // attributes: [],
+      },
+    ],
+  });  */
+  if (!salesUser.length) throw notFound('sales');
+  return salesUser;
+};
+
 module.exports = {
   read,
   readOne,
@@ -126,4 +151,5 @@ module.exports = {
   update,
   destroy,
   getSellerSalesByName,
+  getUserSalesByUserId,
 };
