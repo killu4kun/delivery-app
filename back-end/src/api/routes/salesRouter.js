@@ -9,6 +9,7 @@ const updateSalesController = require('../controllers/updateSalesController');
 const deleteSalesController = require('../controllers/deleteSalesController');
 const getUserBuysByName = require('../controllers/readSalesByUsername');
 const getSellerSalesByName = require('../controllers/readSalesByUsername');
+const readSalesByUserId = require('../controllers/readSalesByUserId');
 
 const router = Router();
 
@@ -22,6 +23,10 @@ router
   .get(readOneSalesController)
   .put(salesUpdateValidation, updateSalesController)
   .delete(deleteSalesController);
+
+router
+  .route('/userid/:id')
+  .get(readSalesByUserId);
 
 router
 .route('/user/:name')

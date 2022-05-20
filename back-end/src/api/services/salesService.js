@@ -108,4 +108,29 @@ const destroy = async (id) => {
   return result;
 };
 
-module.exports = { read, readOne, readWhere, create, update, destroy };
+const getUserSalesByUserId = async (id) => {
+    const salesUser = await Sale.findAll({
+      where: { userId: id },
+    });
+  /* const saleProducts = await SaleProduct.findAll({
+    include: [
+      {
+        model: Sale,
+        as: 'sale',
+        // attributes: [],
+        where: {
+          userId: id
+        }
+      },
+      {
+        model: Product,
+        as: 'product',
+        // attributes: [],
+      },
+    ],
+  });  */
+  if (!salesUser.length) throw notFound('sales');
+  return salesUser;
+};
+
+module.exports = { read, readOne, readWhere, create, update, destroy, getUserSalesByUserId };
