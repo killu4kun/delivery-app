@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/tableProduct.css';
+import '../../styles/tableProduct.css';
 import TableRowProduct from './TableRowProduct';
 
-const TableProduct = () => (
+const TableProduct = ({ products }) => (
   <div className="table-container">
     <table>
       <thead>
@@ -15,9 +15,7 @@ const TableProduct = () => (
         </tr>
       </thead>
       <tbody>
-        <TableRowProduct />
-        <TableRowProduct />
-        <TableRowProduct />
+        { products.map((product, index) => <TableRowProduct key={ index } product={ product } index={ index } />) }
       </tbody>
     </table>
   </div>

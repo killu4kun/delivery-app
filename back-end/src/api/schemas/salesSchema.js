@@ -1,36 +1,53 @@
 const Joi = require('joi');
 const {
-  userIdIsRequired,
-  sellerIdIsRequired,
-  totalPriceIsRequired,
-  deliveryAddressIsRequired,
-  deliveryNumberIsRequired,
-  saleDateIsRequired,
-  statusIsRequired,
+  requiredInteger,
+  requiredString,
+  requiredCurrency,
+  requiredDate,
   productIdIsRequired,
   productQuantityIsRequired,
-} = require('../errors/requestErrors');
+} = require('../errors/errorsTemplate');
 
 module.exports = Joi.object({
-  userId: Joi.number().required().error(userIdIsRequired),
-  sellerId: Joi.number().required().error(sellerIdIsRequired),
-  totalPrice: Joi.number().required().precision(2).error(totalPriceIsRequired),
+  userId: Joi.number().integer().required().error(requiredInteger('userId')),
+
+  sellerId: Joi.number()
+    .integer()
+    .required()
+    .error(requiredInteger('sellerId')),
+
+  totalPrice: Joi.number()
+    .required()
+    .precision(2)
+    .error(requiredCurrency('totalPrice')),
+
   deliveryAddress: Joi.string()
     .required()
     .max(100)
-    .error(deliveryAddressIsRequired),
+    .error(requiredString('deliveryAddress', 0, 100)),
+
   deliveryNumber: Joi.string()
     .required()
     .max(50)
-    .error(deliveryNumberIsRequired),
-  saleDate: Joi.date().required().error(saleDateIsRequired),
-  status: Joi.string().required().max(50).error(statusIsRequired),
+    .error(requiredString('deliveryNumber', 0, 50)),
+
+  saleDate: Joi.date().required().error(requiredDate('saleDate')),
+
+  status: Joi.string()
+    .required()
+    .max(50)
+    .error(requiredString('status', 0, 50)),
+
+  role: Joi.string()
+    .required(),
+
   products: Joi.array().items(
     Joi.object({
-      id: Joi.number().required().error(productIdIsRequired),
+      productId: Joi.number().required().error(productIdIsRequired),
       name: Joi.string(),
       quantity: Joi.number().required().error(productQuantityIsRequired),
-      price: Joi.number().precision(2),
+      unitPrice: Joi.number().precision(2),
+      subtotal: Joi.number().precision(2),
     }),
   ),
 });

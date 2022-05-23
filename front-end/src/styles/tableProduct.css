@@ -4,22 +4,21 @@
 }
 
 table {
-  width: 95%;
-  padding-top: 30px;
-  margin: auto;
   border-spacing: 0 10px;
+  margin: auto;
+  width: 95%;
 }
 
 th {
   font-weight: 100;
 }
 
-.th-item{
+.th-item {
   width: 5%;
 }
 
 .th-description {
-  width: 55%;
+  width: 35%;
 }
 
 .th-quantity {
@@ -27,9 +26,13 @@ th {
 }
 
 .th-unitPrice {
-  width: 10%;;
+  width: 10%;
 }
 
 .th-subtotal {
+  width: 10%;
+}
+
+.th-remover {
   width: 10%;
 }

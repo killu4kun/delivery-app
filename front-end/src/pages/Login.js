@@ -22,6 +22,15 @@ function Login() {
     if (!emailValidation || !passwordValidation) setDisabled(true);
   }, [email, password]);
 
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user.role === 'administrator') history.push('/admin/manage');
+      if (user.role === 'seller') history.push('/seller/orders');
+      if (user.role === 'customer') history.push('/customer/products');
+    }
+  }, [history]);
+
   const { setUserEmail, setUserPassword, setUsername, setToken } = useContext(MyContext);
 
   const validateUser = async () => {
@@ -34,13 +43,16 @@ function Login() {
       setUsername(user.name);
       setToken(user.token);
       const userToSave = JSON.stringify({
+        id: user.id,
         name: user.name,
         email: user.email,
         role: user.role,
         token: user.token,
       });
       localStorage.setItem('user', userToSave);
-      history.push('/customer/products');
+      if (user.role === 'administrator') history.push('/admin/manage');
+      if (user.role === 'seller') history.push('/seller/orders');
+      if (user.role === 'customer') history.push('/customer/products');
     } catch (err) {
       setError(err.message);
     }

@@ -1,13 +1,12 @@
-.main-products {
-  margin-top: 100px;
+main {
+  margin-top: 80px;
   position: absolute;
   width: 100%;
 }
 
 .grid-products {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  padding: 10px;
+  grid-template-columns: auto auto auto auto auto auto;
 }
 
 .button-checkout {

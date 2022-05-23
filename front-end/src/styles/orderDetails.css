@@ -1,14 +1,14 @@
 .main-orderDetails {
   margin: auto;
   margin-top: 100px;
-  width: 90%;
 }
 
-.container-OrderDefails {
+.container-OrderDetails {
   border: solid 2px rgb(162, 162, 162);
   display: flex;
   flex-direction: column;
-  width: 100%;
+  margin: auto;
+  width: 90%;
 }
 
 .total-price-order {
@@ -18,8 +18,8 @@
   color: white;
   font-size: 32px;
   font-weight: 900;
-  margin: 100px 20px 10px; 
-  padding: 10px 20px;
+  margin: 10px 20px 10px; 
+  padding: 15px 20px;
   text-align: center;
   width: 250px;
 }

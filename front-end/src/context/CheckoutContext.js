@@ -7,14 +7,21 @@ export const CheckoutProvider = ({ children }) => {
   const [checkout, setCheckout] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [buttonCheckout, setButtonCheckout] = useState(true);
-  const [datatest, setDataTest] = useState('customer_products__button-cart');
 
   const resultTotal = (arrayProduct) => {
     const total = arrayProduct.reduce((
       totalOrder,
       product,
     ) => totalOrder + product.subtotal, 0);
-    return total;
+    return total.toFixed(2);
+  };
+
+  const destroyCheckout = () => {
+    setCheckout([]);
+    localStorage.setItem('checkout', JSON.stringify([]));
+    setTotalPrice(0);
+    localStorage.setItem('totalPrice', JSON.stringify(0));
+    setButtonCheckout(true);
   };
 
   const addProduct = ({ id, name, price }, quantity) => {
@@ -24,8 +31,10 @@ export const CheckoutProvider = ({ children }) => {
       name,
       quantity: 1,
       unitPrice: Number(price),
-      subtotal: Number(price) * quantity,
+      subtotal: price * quantity,
     };
+
+    console.log(product);
 
     const filter = checkout.filter((
       productFilter,
@@ -40,16 +49,16 @@ export const CheckoutProvider = ({ children }) => {
       ) => productFilter.productId !== product.productId);
 
       product.quantity = quantity;
-      product.subtotal = product.unitPrice * quantity;
 
       newArray.push(product);
     }
+
     const total = resultTotal(newArray);
+
     setCheckout(newArray);
     setTotalPrice(total);
 
     if (total > 0) setButtonCheckout(false);
-    setDataTest('customer_products__checkout-bottom-value');
 
     console.log(checkout);
 
@@ -64,17 +73,16 @@ export const CheckoutProvider = ({ children }) => {
       name,
       quantity,
       unitPrice: Number(price),
-      subtotal: Number(price) * quantity,
+      subtotal: price * quantity,
     };
 
-    const filter = checkout.filter((
-      productFilter,
-    ) => productFilter.productId === product.productId);
+    console.log(product);
+    console.log(quantity);
 
-    if (quantity < 0) {
-      newArray = filter;
-      const indice = newArray.indexOf({ productId: id });
-      newArray.splice(indice, 1);
+    if (quantity <= 0) {
+      newArray = checkout.filter((
+        productFilter,
+      ) => productFilter.productId !== product.productId);
     } else {
       newArray = checkout.filter((
         productFilter,
@@ -88,14 +96,13 @@ export const CheckoutProvider = ({ children }) => {
 
     if (total > 0) {
       setButtonCheckout(false);
-      setDataTest('customer_products__checkout-bottom-value');
     }
 
     if (total <= 0) {
       setButtonCheckout(true);
-      setDataTest('customer_products__button-cart');
     }
 
+    console.log(newArray);
     localStorage.setItem('checkout', JSON.stringify(newArray));
     localStorage.setItem('totalPrice', JSON.stringify(resultTotal(newArray)));
   };
@@ -103,6 +110,10 @@ export const CheckoutProvider = ({ children }) => {
   useEffect(() => {
     if (localStorage.getItem('checkout')) {
       setCheckout(JSON.parse(localStorage.getItem('checkout')));
+    }
+    if (localStorage.getItem('totalPrice')) {
+      setTotalPrice(Number(JSON.parse(localStorage.getItem('totalPrice'))));
+      setButtonCheckout(false);
     }
   }, []);
 
@@ -115,7 +126,7 @@ export const CheckoutProvider = ({ children }) => {
         totalPrice,
         setTotalPrice,
         buttonCheckout,
-        datatest,
+        destroyCheckout,
       } }
     >
       { children }

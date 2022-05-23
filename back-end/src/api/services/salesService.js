@@ -1,10 +1,10 @@
+const { idNotFound, notFound } = require('../errors/errorsTemplate');
 const {
   Sale,
   SaleProduct,
   Product,
   sequelize,
 } = require('../../database/models');
-const { noSales, saleNotFound } = require('../errors/salesErrors');
 
 const read = async () => {
   const saleProducts = await SaleProduct.findAll({
@@ -21,7 +21,7 @@ const read = async () => {
       },
     ],
   });
-  if (!saleProducts.length) throw noSales;
+  if (!saleProducts.length) throw notFound('sales');
   return saleProducts;
 };
 
@@ -41,7 +41,7 @@ const readWhere = async (id) => {
       },
     ],
   });
-  if (!saleProducts.length) throw noSales;
+  if (!saleProducts.length) throw notFound('sales');
   return saleProducts;
 };
 
@@ -60,14 +60,14 @@ const readOne = async (id) => {
       },
     ],
   });
-  if (!saleProducts) throw saleNotFound;
+  if (!saleProducts) throw idNotFound('sale');
   return saleProducts;
 };
 
 const mapSalesProductsBulk = async (products, saleId) =>
   products.map((product) => ({
     saleId,
-    productId: product.id,
+    productId: product.productId,
     quantity: product.quantity,
   }));
 
@@ -75,10 +75,10 @@ const create = async (body) => {
   const result = await sequelize.transaction(async (t) => {
     const sale = await Sale.create(body, { transaction: t });
     const productsMap = await mapSalesProductsBulk(body.products, sale.id);
-    const saleProducts = await SaleProduct.bulkCreate(productsMap, {
+    await SaleProduct.bulkCreate(productsMap, {
       transaction: t,
     });
-    return saleProducts;
+    return sale.id;
   });
   return result;
 };
@@ -108,4 +108,29 @@ const destroy = async (id) => {
   return result;
 };
 
-module.exports = { read, readOne, readWhere, create, update, destroy };
+const getUserSalesByUserId = async (id) => {
+    const salesUser = await Sale.findAll({
+      where: { userId: id },
+    });
+  /* const saleProducts = await SaleProduct.findAll({
+    include: [
+      {
+        model: Sale,
+        as: 'sale',
+        // attributes: [],
+        where: {
+          userId: id
+        }
+      },
+      {
+        model: Product,
+        as: 'product',
+        // attributes: [],
+      },
+    ],
+  });  */
+  if (!salesUser.length) throw notFound('sales');
+  return salesUser;
+};
+
+module.exports = { read, readOne, readWhere, create, update, destroy, getUserSalesByUserId };

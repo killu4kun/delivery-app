@@ -21,10 +21,10 @@ const CardProduct = ({ product }) => {
   };
 
   const handleChangeQuantity = ({ target: { value } }) => {
-    if (value < 0) value = 1;
-    setQuantity(value);
-    addProduct(product, value);
-    console.log(value);
+    const manualQuantity = Number(value);
+    const newValue = manualQuantity > 0 ? manualQuantity : 0;
+    setQuantity(newValue);
+    addProduct(product, newValue);
   };
 
   useEffect(() => {
@@ -57,7 +57,11 @@ const CardProduct = ({ product }) => {
         {
           Intl.NumberFormat(
             'pt-br',
-            { style: 'currency', currency: 'BRL' },
+            {
+              style: 'currency',
+              currency: 'BRL',
+              minimumFractionDigits: 2,
+            },
           )
             .format(product.price)
         }
