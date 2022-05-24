@@ -5,5 +5,4 @@ router.get('/', getAllUser);
 
 router.get('/:id', getUserId);
 
-
 module.exports = router;
