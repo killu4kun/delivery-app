@@ -6,6 +6,7 @@ const loginRouter = require('./routes/loginRouter');
 const productRouter = require('./routes/productRouter');
 const salesRouter = require('./routes/salesRouter');
 const registerRouter = require('./routes/registerRouter');
+const userRouter = require('./routes/userRouter');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
 app.use(bodyParser);
@@ -16,6 +17,7 @@ app.use('/login', loginRouter);
 app.use('/sales', salesRouter);
 app.use('/register', registerRouter);
 app.use('/products', productRouter);
+app.use('/users', userRouter);
 
 app.use(errorMiddleware);
 
