@@ -13,15 +13,13 @@
 
 .total-price-order {
   align-self: end;
-  background-color: #036B52;
+  background-color: #036b52;
   border-radius: 15px;
   color: white;
   font-size: 32px;
   font-weight: 900;
-  margin: 10px 20px 10px; 
+  margin: 10px 20px;
   padding: 15px 20px;
   text-align: center;
   width: 250px;
 }
-
-
