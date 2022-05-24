@@ -33,7 +33,7 @@ const OrderDetails = ({ match: { params: { id } } }) => {
           <TableProduct products={ products } />
           <div
             className="total-price-order"
-            data-testid={ `customer_order_details__element-order-total-price-${id}` }
+            data-testid={ `customer_order_details__element-order-total-price` }
           >
             {
               ` Total: ${Intl.NumberFormat(
