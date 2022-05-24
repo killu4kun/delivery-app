@@ -24,8 +24,8 @@
 }
 
 .header-date {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: right;
   margin-right: 15px;
   width: 15%;
