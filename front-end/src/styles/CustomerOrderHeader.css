@@ -1,0 +1,80 @@
+.header-CustomOrder {
+  background-color: #eaf1ef;
+  display: flex;
+  height: 30px;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.header-order {
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+  width: 15%;
+}
+
+.header-saller {
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  width: 25%;
+}
+
+.header-date {
+  align-items: center;
+  display: flex;
+  justify-content: right;
+  margin-right: 15px;
+  width: 15%;
+}
+
+.text-date {
+  background-color: #f2fffcbf;
+  border: solid 1px grey;
+  border-radius: 10px;
+  font-weight: 700;
+  padding: 10px;
+
+}
+
+.header-status {
+  align-items: center;
+  display: flex;
+  width: 15%;
+}
+
+.header-status-text {
+  background-color: rgba(0, 204, 155, 0.75);
+  border: solid 1px grey;
+  border-radius: 10px;
+  font-weight: 900;
+  padding: 10px 40px;
+}
+
+.header-change-status {
+  align-items: center;
+  display: flex;
+  width: 30%;
+}
+
+.button-change-status {
+  background-color: #036b52;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+  margin-left: 10px;
+  padding: 10px 50px;
+}
+
+.button-change-status:hover {
+  background-color: #05ac85;
+}
+
+.button-change-status:disabled {
+  background-color: #3a5f56;
+}

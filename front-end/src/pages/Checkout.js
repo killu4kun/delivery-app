@@ -6,6 +6,7 @@ import Nav from '../components/Nav';
 import TableProduct from '../components/checkout/TableProduct';
 import { saveSale as createSale } from '../services/sales-api';
 import '../styles/checkout.css';
+import NavCustomer from '../components/NavCustomer';
 
 const Checkout = ({ history }) => {
   const title = 'Produtos';
@@ -44,7 +45,9 @@ const Checkout = ({ history }) => {
 
   return (
     <>
-      <Nav titlePage={ title } />
+      <Nav>
+        <NavCustomer titlePage={ title } />
+      </Nav>
       <main className="main-checkout">
         <h3>Finalizar Pedido</h3>
         <div className="container-checkout">

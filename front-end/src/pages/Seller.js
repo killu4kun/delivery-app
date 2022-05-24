@@ -13,7 +13,7 @@ function Seller() {
     if (sales.length === 0) return <h3>Loading ...</h3>;
     return (
       <div>
-        {sales.map(
+        { sales.map(
           (
             { id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber },
             index,

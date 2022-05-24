@@ -2,10 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Orders from "./pages/Orders";
-import PrivateRoute from "./components/PrivateRoute";
+import OrderDetails from "./pages/OrderDetails";
 import Products from "./pages/Products";
 import Register from "./pages/Register";
 import { ProductsProvider } from "./context/ProductsContext.js";
@@ -13,6 +12,7 @@ import { Provider } from "./context/Provider";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import Admin from "./pages/Admin";
 import Seller from "./pages/Seller";
+import OrderSellerDetails from "./pages/OrderSellerDetails";
 import "./index.css";
 
 ReactDOM.render(
@@ -26,21 +26,15 @@ ReactDOM.render(
             <Login />
           </Provider>
         </Route>
-        <Route path="/seller/orders" component={Seller} />
-        <Route path="/admin/manage" component={Admin} />
-        <Route path="/register" component={Register} />
-        <Route path="/customer/orders/:id">
-          <h1>Orders Details</h1>
-        </Route>
-        <Route path="/customer/orders" component={Orders} />
         <ProductsProvider>
           <CheckoutProvider>
             <Route path="/customer/products" component={Products} />
+            <Route path="/seller/orders/:id" component={ OrderSellerDetails }/>
+            <Route exact path="/seller/orders" component={Seller} />
             <Route path="/admin/manage" component={Admin} />
             <Route path="/register" component={Register} />
-            <Route path="/customer/orders/:id">
-              <h1>Orders Details</h1>
-            </Route>
+            <Route path='/customer/orders/:id' component={ OrderDetails } />
+            <Route exact path="/customer/orders" component={ Orders } />
             <Route path="/customer/checkout" component={Checkout} />
           </CheckoutProvider>
         </ProductsProvider>

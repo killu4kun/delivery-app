@@ -23,7 +23,7 @@ const Products = ({ history }) => {
       <Nav>
         <NavCustomer titlePage={ title } />
       </Nav>
-      <main>
+      <main className="main-products">
         <button
           type="button"
           className="button-checkout"
@@ -34,10 +34,6 @@ const Products = ({ history }) => {
         >
           Ver carrinho:
           <span data-testid="customer_products__checkout-bottom-value">
-            {`Ver carrinho: ${Intl.NumberFormat('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(totalPrice)}`}
             {
               ` ${Intl.NumberFormat(
                 'pt-br',
