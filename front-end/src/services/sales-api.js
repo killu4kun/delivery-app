@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+export const salesFetch = async (name) => {
+  const sales = await axios.get(`http://localhost:3001/sales/seller/${name}`);
+  return sales;
+};
+
 export const saveSale = async (token, bodySale) => {
   const response = await axios({
     method: 'post',

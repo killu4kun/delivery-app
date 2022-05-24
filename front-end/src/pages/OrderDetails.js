@@ -6,9 +6,10 @@ import TableProduct from '../components/OrderDetails/TableProduct';
 import { getSaleId } from '../services/sales-api';
 import { getUser } from '../services/users-api';
 import '../styles/orderDetails.css';
+import NavCustomer from '../components/NavCustomer';
 
 const OrderDetails = ({ match: { params: { id } } }) => {
-  const title = 'Orders';
+  const title = 'Pedidos';
   const [orderHeader, setOrderHeader] = useState({});
   const [products, setProducts] = useState([]);
 
@@ -27,7 +28,9 @@ const OrderDetails = ({ match: { params: { id } } }) => {
 
   return (
     <>
-      <Nav titlePage={ title } />
+      <Nav>
+        <NavCustomer titlePage={ title } />
+      </Nav>
       <main className="main-orderDetails">
         <h3>Detalhes Produtos</h3>
         <div className="container-OrderDetails">

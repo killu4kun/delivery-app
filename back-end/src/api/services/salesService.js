@@ -1,5 +1,6 @@
 const { idNotFound, notFound } = require('../errors/errorsTemplate');
 const {
+  User,
   Sale,
   SaleProduct,
   Product,
@@ -108,10 +109,19 @@ const destroy = async (id) => {
   return result;
 };
 
+const getSellerSalesByName = async (name) => {
+  const seller = await User.findOne({ where: { name } });
+  if (!seller) return notFound('user');
+  const sales = await Sale.findAll({ where: { sellerId: seller.id } });
+  console.log(sales);
+  if (!sales.length) throw notFound('sales');
+  return sales;
+};
+
 const getUserSalesByUserId = async (id) => {
-    const salesUser = await Sale.findAll({
-      where: { userId: id },
-    });
+  const salesUser = await Sale.findAll({
+    where: { userId: id },
+  });
   /* const saleProducts = await SaleProduct.findAll({
     include: [
       {
@@ -133,4 +143,13 @@ const getUserSalesByUserId = async (id) => {
   return salesUser;
 };
 
-module.exports = { read, readOne, readWhere, create, update, destroy, getUserSalesByUserId };
+module.exports = {
+  read,
+  readOne,
+  readWhere,
+  create,
+  update,
+  destroy,
+  getSellerSalesByName,
+  getUserSalesByUserId,
+};

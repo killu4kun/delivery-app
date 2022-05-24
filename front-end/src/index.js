@@ -11,6 +11,8 @@ import { ProductsProvider } from "./context/ProductsContext.js";
 import { Provider } from "./context/Provider";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import Admin from "./pages/Admin";
+import Seller from "./pages/Seller";
+import OrderSellerDetails from "./pages/OrderSellerDetails";
 import "./index.css";
 
 ReactDOM.render(
@@ -24,14 +26,16 @@ ReactDOM.render(
             <Login />
           </Provider>
         </Route>
-        <Route path='/admin/manage' component={Admin} />
-        <Route path="/register" component={ Register } />
-        <Route path='/customer/orders/:id' component={ OrderDetails } />
-        <Route path="/customer/orders" component={ Orders } />
         <ProductsProvider>
           <CheckoutProvider>
-            <Route path='/customer/products' component={ Products } />
-            <Route path='/customer/checkout' component={ Checkout } />
+            <Route path="/customer/products" component={Products} />
+            <Route path="/seller/orders/:id" component={ OrderSellerDetails }/>
+            <Route exact path="/seller/orders" component={Seller} />
+            <Route path="/admin/manage" component={Admin} />
+            <Route path="/register" component={Register} />
+            <Route path='/customer/orders/:id' component={ OrderDetails } />
+            <Route exact path="/customer/orders" component={ Orders } />
+            <Route path="/customer/checkout" component={Checkout} />
           </CheckoutProvider>
         </ProductsProvider>
       </Switch>

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CardOrder from '../components/CardOrder';
 import Nav from '../components/Nav';
+import NavCustomer from '../components/NavCustomer';
 import { getSalesUser } from '../services/sales-api';
 import '../styles/orders.css';
 
 const Orders = ({ history }) => {
-  const title = 'Orders';
+  const title = 'Pedidos';
   const [orders, setOrders] = useState([]);
 
   const fetchOrders = async () => {
@@ -25,7 +26,9 @@ const Orders = ({ history }) => {
 
   return (
     <>
-      <Nav titlePage={ title } />
+      <Nav>
+        <NavCustomer titlePage={ title } />
+      </Nav>
       <main className="main-order">
         <div className="grid-orders">
           {

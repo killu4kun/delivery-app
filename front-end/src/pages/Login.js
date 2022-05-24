@@ -10,6 +10,8 @@ function Login() {
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(true);
   const history = useHistory();
+  const sellerOrders = '/seller/orders';
+  const customerProducts = '/customer/products';
 
   useEffect(() => {
     const regex = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
@@ -26,8 +28,8 @@ function Login() {
     if (localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user.role === 'administrator') history.push('/admin/manage');
-      if (user.role === 'seller') history.push('/seller/orders');
-      if (user.role === 'customer') history.push('/customer/products');
+      if (user.role === 'seller') history.push(sellerOrders);
+      if (user.role === 'customer') history.push(customerProducts);
     }
   }, [history]);
 
@@ -50,9 +52,11 @@ function Login() {
         token: user.token,
       });
       localStorage.setItem('user', userToSave);
+      if (user.role === 'seller') return history.push(sellerOrders);
+      history.push(customerProducts);
       if (user.role === 'administrator') history.push('/admin/manage');
-      if (user.role === 'seller') history.push('/seller/orders');
-      if (user.role === 'customer') history.push('/customer/products');
+      if (user.role === 'seller') history.push(sellerOrders);
+      if (user.role === 'customer') history.push(customerProducts);
     } catch (err) {
       setError(err.message);
     }
