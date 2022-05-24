@@ -4,6 +4,7 @@ import CustomerOrderHeader from '../components/OrderDetails/CustomerOrderHeader'
 import Nav from '../components/Nav';
 import TableProduct from '../components/OrderDetails/TableProduct';
 import { getSaleId } from '../services/sales-api';
+import { getUser } from '../services/users-api';
 import '../styles/orderDetails.css';
 
 const OrderDetails = ({ match: { params: { id } } }) => {
@@ -14,11 +15,12 @@ const OrderDetails = ({ match: { params: { id } } }) => {
   useEffect(() => {
     async function callback() {
       const result = await getSaleId(id);
+      const seller = await getUser(result[0].sale.sellerId);
       const arrayProduct = result.map((
         sale,
       ) => ({ quantity: sale.quantity, ...sale.product }));
       setProducts(arrayProduct);
-      setOrderHeader(result[0].sale);
+      setOrderHeader({ seller: seller.name, ...result[0].sale });
     }
     callback();
   }, [id]);
