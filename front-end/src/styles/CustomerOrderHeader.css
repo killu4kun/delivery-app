@@ -70,3 +70,11 @@
   margin-left: 10px;
   padding: 10px 50px;
 }
+
+.button-change-status:hover {
+  background-color: #05ac85;
+}
+
+.button-change-status:disabled {
+  background-color: #3a5f56;
+}

@@ -11,13 +11,16 @@ const OrderDetails = ({ match: { params: { id } } }) => {
   const [orderHeader, setOrderHeader] = useState({});
   const [products, setProducts] = useState([]);
 
-  useEffect(async () => {
-    const result = await getSaleId(id);
-    const arrayProduct = result.map((
-      sale,
-    ) => ({ quantity: sale.quantity, ...sale.product }));
-    setProducts(arrayProduct);
-    setOrderHeader(result[0].sale);
+  useEffect(() => {
+    async function callback() {
+      const result = await getSaleId(id);
+      const arrayProduct = result.map((
+        sale,
+      ) => ({ quantity: sale.quantity, ...sale.product }));
+      setProducts(arrayProduct);
+      setOrderHeader(result[0].sale);
+    }
+    callback();
   }, [id]);
 
   return (

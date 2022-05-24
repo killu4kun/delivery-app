@@ -37,13 +37,14 @@ const CustomerOrderHeader = ({ order }) => (
       </span>
     </div>
     <div className="header-change-status">
-      <div
+      <button
         type="button"
         className="button-change-status"
         data-testid="customer_order_details__button-delivery-check"
+        disabled
       >
         MARCAR COMO ENTREGUE
-      </div>
+      </button>
     </div>
   </div>
 );
