@@ -50,10 +50,10 @@ const CustomerOrderHeader = ({ order }) => (
 
 CustomerOrderHeader.propTypes = {
   order: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    sellerId: PropTypes.number.isRequired,
-    saleDate: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    sellerId: PropTypes.number,
+    saleDate: PropTypes.string,
+    status: PropTypes.string,
   }).isRequired,
 };
 

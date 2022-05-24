@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CustomerOrderHeader from '../components/OrderDetails/CustomerOrderHeader';
 import Nav from '../components/Nav';
@@ -11,7 +11,7 @@ const OrderDetails = ({ match: { params: { id } } }) => {
   const [orderHeader, setOrderHeader] = useState({});
   const [products, setProducts] = useState([]);
 
-  const fetchSale = useCallback(async () => {
+  useEffect(async () => {
     const result = await getSaleId(id);
     const arrayProduct = result.map((
       sale,
@@ -19,8 +19,6 @@ const OrderDetails = ({ match: { params: { id } } }) => {
     setProducts(arrayProduct);
     setOrderHeader(result[0].sale);
   }, [id]);
-
-  useEffect(fetchSale(), []);
 
   return (
     <>

@@ -25,10 +25,13 @@ const TableProduct = ({ products }) => (
 );
 
 TableProduct.propTypes = {
-  products: PropTypes.shape([{
-    name: PropTypes.string,
-    quantity: PropTypes.string,
-    price: PropTypes.number,
-  }]).isRequired,
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      quantity: PropTypes.number,
+      price: PropTypes.string,
+    }).isRequired,
+  ).isRequired,
 };
+
 export default TableProduct;

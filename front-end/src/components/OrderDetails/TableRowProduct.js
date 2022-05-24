@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../../styles/tableRowProduct.css';
 
 const TableRowProduct = ({ product, index }) => (
@@ -58,8 +59,8 @@ TableRowProduct.propTypes = {
   index: PropTypes.number.isRequired,
   product: PropTypes.shape({
     name: PropTypes.string,
-    quantity: PropTypes.string,
-    price: PropTypes.number,
+    quantity: PropTypes.number,
+    price: PropTypes.string,
   }).isRequired,
 };
 
