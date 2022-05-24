@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../../styles/tableProduct.css';
 import TableRowProduct from './TableRowProduct';
 
@@ -15,10 +16,19 @@ const TableProduct = ({ products }) => (
         </tr>
       </thead>
       <tbody>
-        { products.map((product, index) => <TableRowProduct key={ index } product={ product } index={ index } />) }
+        { products.map((
+          product, index,
+        ) => <TableRowProduct key={ index } product={ product } index={ index } />) }
       </tbody>
     </table>
   </div>
 );
 
+TableProduct.propTypes = {
+  products: PropTypes.shape([{
+    name: PropTypes.string,
+    quantity: PropTypes.string,
+    price: PropTypes.number,
+  }]).isRequired,
+};
 export default TableProduct;

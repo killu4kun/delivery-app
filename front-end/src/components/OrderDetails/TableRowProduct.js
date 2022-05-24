@@ -3,13 +3,13 @@ import '../../styles/tableRowProduct.css';
 
 const TableRowProduct = ({ product, index }) => (
   <tr className="tr-product">
-    <td 
+    <td
       className="td-item"
       data-testid={ `customer_order_details__element-order-table-item-number-${index}` }
     >
       { index + 1 }
     </td>
-    <td 
+    <td
       className="td-description"
       data-testid={ `customer_order_details__element-order-table-name-${index}` }
     >
@@ -17,31 +17,50 @@ const TableRowProduct = ({ product, index }) => (
     </td>
     <td
       className="td-quantity"
-      data-testid={ `customer_order_details__element-order-table-quantity-${index}`}
+      data-testid={ `customer_order_details__element-order-table-quantity-${index}` }
     >
       { product.quantity }
     </td>
-    <td 
+    <td
       className="td-unitPrice"
       data-testid={ `customer_order_details__element-order-table-unit-price-${index}` }
     >
       {
         ` ${Intl.NumberFormat(
           'pt-br',
-            {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            },
+          {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+          },
         ).format(product.price)}`
-      }</td>
+      }
+    </td>
     <td
       className="td-subtotal"
-      data-testid={ `customer_order_details__element-order-table-sub-total-${index}`}
+      data-testid={ `customer_order_details__element-order-table-sub-total-${index}` }
     >
-      R$12,30
+      {
+        ` ${Intl.NumberFormat(
+          'pt-br',
+          {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+          },
+        ).format(product.price * product.quantity)}`
+      }
     </td>
   </tr>
 );
+
+TableRowProduct.propTypes = {
+  index: PropTypes.number.isRequired,
+  product: PropTypes.shape({
+    name: PropTypes.string,
+    quantity: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
+};
 
 export default TableRowProduct;

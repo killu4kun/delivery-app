@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import CustomerOrderHeader from '../components/OrderDetails/CustomerOrderHeader';
 import Nav from '../components/Nav';
@@ -6,21 +6,21 @@ import TableProduct from '../components/OrderDetails/TableProduct';
 import { getSaleId } from '../services/sales-api';
 import '../styles/orderDetails.css';
 
-const OrderDetails = ({ match: { params : { id }} }) => {
+const OrderDetails = ({ match: { params: { id } } }) => {
   const title = 'Orders';
   const [orderHeader, setOrderHeader] = useState({});
   const [products, setProducts] = useState([]);
 
-  const fetchSale = async () => {
+  const fetchSale = useCallback(async () => {
     const result = await getSaleId(id);
-    const arrayProduct = result.map((sale) => ({ quantity: sale.quantity, ...sale.product }));
+    const arrayProduct = result.map((
+      sale,
+    ) => ({ quantity: sale.quantity, ...sale.product }));
     setProducts(arrayProduct);
     setOrderHeader(result[0].sale);
-  }
+  }, [id]);
 
-  useEffect(() => {
-    fetchSale();
-  }, []);
+  useEffect(fetchSale(), []);
 
   return (
     <>
@@ -29,12 +29,12 @@ const OrderDetails = ({ match: { params : { id }} }) => {
         <h3>Detalhes Produtos</h3>
         <div className="container-OrderDetails">
           <CustomerOrderHeader order={ orderHeader } />
-          <TableProduct products={ products }/>
+          <TableProduct products={ products } />
           <div
             className="total-price-order"
             data-testid="customer_order_details__element-order-total-price-"
           >
-           {
+            {
               ` Total: ${Intl.NumberFormat(
                 'pt-br',
                 {
@@ -43,8 +43,8 @@ const OrderDetails = ({ match: { params : { id }} }) => {
                   minimumFractionDigits: 2,
                 },
               )
-                .format(orderHeader.totalPrice)}
-            `}
+                .format(orderHeader.totalPrice)}`
+            }
           </div>
         </div>
       </main>
@@ -52,4 +52,11 @@ const OrderDetails = ({ match: { params : { id }} }) => {
   );
 };
 
+OrderDetails.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
 export default OrderDetails;
