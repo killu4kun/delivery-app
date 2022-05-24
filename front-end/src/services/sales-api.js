@@ -12,6 +12,11 @@ export const saveSale = async (token, bodySale) => {
 };
 
 export const getSalesUser = async (id) => {
-  const response = await axios(`http://localhost:3001/sales/userid/${id}`);
+  const response = await axios.get(`http://localhost:3001/sales/userid/${id}`);
+  return response.data;
+};
+
+export const getSaleId = async (id) => {
+  const response = await axios.get(`http://localhost:3001/sales/${id}`);
   return response.data;
 };

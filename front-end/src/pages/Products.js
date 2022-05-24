@@ -24,7 +24,7 @@ const Products = ({ history }) => {
   return (
     <>
       <Nav titlePage={ title } />
-      <main>
+      <main className="main-products">
         <button
           type="button"
           className="button-checkout"

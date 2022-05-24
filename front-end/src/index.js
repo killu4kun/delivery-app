@@ -2,10 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Orders from "./pages/Orders";
-import PrivateRoute from "./components/PrivateRoute";
+import OrderDetails from "./pages/OrderDetails";
 import Products from "./pages/Products";
 import Register from "./pages/Register";
 import { ProductsProvider } from "./context/ProductsContext.js";
@@ -27,9 +26,7 @@ ReactDOM.render(
         </Route>
         <Route path='/admin/manage' component={Admin} />
         <Route path="/register" component={ Register } />
-        <Route path='/customer/orders/:id'>
-          <h1>Orders Details</h1>
-        </Route>
+        <Route path='/customer/orders/:id' component={ OrderDetails } />
         <Route path="/customer/orders" component={ Orders } />
         <ProductsProvider>
           <CheckoutProvider>
