@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { getUser } from '../../services/users-api';
 import '../../styles/CustomerOrderHeader.css';
 
 const CustomerOrderHeader = ({ order }) => {
@@ -18,7 +17,9 @@ const CustomerOrderHeader = ({ order }) => {
         className="header-saller"
       >
         Vendedor(a):
-        <span data-testid="customer_order_details__element-order-details-label-seller-name" >
+        <span
+          data-testid="customer_order_details__element-order-details-label-seller-name"
+        >
           { order.seller }
         </span>
       </div>
@@ -33,10 +34,12 @@ const CustomerOrderHeader = ({ order }) => {
             ).format(new Date(order.saleDate.substr(0, numMaxCharacters))) }
         </span>
       </div>
-      <div className="header-status">
+      <div
+        className="header-status"
+        data-testid="customer_order_details__element-order-details-label-delivery-status"
+      >
         <span
           className="header-status-text"
-          data-testid="customer_order_details__element-order-details-label-delivery-status"
         >
           { order.status }
         </span>
@@ -53,12 +56,13 @@ const CustomerOrderHeader = ({ order }) => {
       </div>
     </div>
   );
-}
+};
 
 CustomerOrderHeader.propTypes = {
   order: PropTypes.shape({
     id: PropTypes.number,
     sellerId: PropTypes.number,
+    seller: PropTypes.string,
     saleDate: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,

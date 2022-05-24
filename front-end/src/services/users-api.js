@@ -5,7 +5,7 @@ export const getUser = async (id) => {
   return response.data;
 };
 
-export const getAllUser = async (id) => {
-  const response = await axios.get(`http://localhost:3001/users/`);
+export const getAllUser = async () => {
+  const response = await axios.get('http://localhost:3001/users/');
   return response.data;
 };
